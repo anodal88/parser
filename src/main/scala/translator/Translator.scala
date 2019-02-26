@@ -14,18 +14,18 @@ object Translator {
 
   }
 
-  def get_file_contents(path: String): Unit = {
+  def get_file_contents(path: String): Array[String] = {
     var content: Array[String] = Array()
     try {
       for (line <- Source.fromResource("templates/origin/example.soy").getLines()) {
-       println(line.split(" +"))
+        content = Array.concat(content,line.split(" +").toArray)
       }
 
     } catch {
       case e: FileNotFoundException => println("Couldn't find that file.")
       case e: IOException => println("Got an IOException!")
     }
-   // content
+    content
   }
 
   def writeFile(msg: String) = {
@@ -40,7 +40,7 @@ object Translator {
   }
 
   def main(args: Array[String]): Unit = {
-    get_file_contents(originFile)
+   println(get_file_contents(originFile).mkString(" | "))
 
   }
 }
