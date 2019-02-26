@@ -1,6 +1,12 @@
 package translator
 
-class SoyToken {
+
+abstract class Token (token:String)
+
+case class SoyParamToken(val token: String ="@param") extends Token(token)
+
+case class ifToken(val id:String="if")
+object SoyToken {
 
   val if_token = "{if"
   val end_if_token = "{/if}"

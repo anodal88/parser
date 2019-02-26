@@ -7,26 +7,8 @@ import java.io.File
 
 object Translator {
 
-  val parserService = new SoyToVueParserService()
-  val originFile = "example.soy"
+  val translatorService = new SoyToVueTranslatorService()
 
-  def translateFromSoyTemplate(soyTemplate: String) = {
-
-  }
-
-  def get_file_contents(path: String): Array[String] = {
-    var content: Array[String] = Array()
-    try {
-      for (line <- Source.fromResource("templates/origin/example.soy").getLines()) {
-        content = Array.concat(content,line.split(" +").toArray)
-      }
-
-    } catch {
-      case e: FileNotFoundException => println("Couldn't find that file.")
-      case e: IOException => println("Got an IOException!")
-    }
-    content
-  }
 
   def writeFile(msg: String) = {
     val writer = new PrintWriter(new File("Write.txt"))
@@ -40,7 +22,12 @@ object Translator {
   }
 
   def main(args: Array[String]): Unit = {
-   println(get_file_contents(originFile).mkString(" | "))
 
+    //translatorService.writeComponent("my-custom-component")
+    //println(translatorService.getTemplateName())
+    //println(translatorService.findParams())
+    //println(translatorService.getTemplateNamesPace())
+    //println(translatorService.findDependencies())
+    println(translatorService.getVueComponentDependencyMap())
   }
 }
