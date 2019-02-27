@@ -125,13 +125,13 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     * @return
     */
   def getVueComponentDependencyMap() = {
-    var result : List[(String,List[String])] = List()
+    var result: List[(String, List[String])] = List()
     val components = this.findTokenCollections("{call", "}")
     for (cmp <- components) {
       val subCmpStart = this.rawText.indexOf(cmp)
       val subCmpEnd = this.rawText.indexOf("{/call}", subCmpStart)
       val subTemplate = this.rawText.slice(subCmpStart, subCmpEnd)
-      result = result:+(cmp, this.findTokenCollections("{param", ":",true,subTemplate))
+      result = result :+ (cmp, this.findTokenCollections("{param", ":", true, subTemplate))
     }
     result
   }
@@ -154,7 +154,7 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     */
   def findTokenCollections(paramNameStart: String, paramNameEnd: String, sanitizeValue: Boolean = false, tmpl: String = ""): List[String] = {
     var pos = 0
-    val template = if(tmpl.size > 0) tmpl else this.rawText
+    val template = if (tmpl.size > 0) tmpl else this.rawText
     var result = new ListBuffer[String]()
     while (pos < template.size) {
       val paramNameStartPos = template.indexOf(paramNameStart, pos)
@@ -185,5 +185,24 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
 
   def getVueTemplate(): String = {
     ""
+  }
+
+  /**
+    * Render vue component using the given props
+    * @param selector
+    * @param props
+    * @return
+    */
+  def renderVueComponent(selector: String, props: List[String]) = {
+    var result: String = ""
+    val componentOpenTag = s"<${selector} \n"
+    val componentOpenTagClose = ">"
+    val componentCloseTag = s"</${selector}>"
+    result += componentOpenTag
+    for (prop <- props) {
+      result += s"\tv-bind:${prop} = ${prop}\n"
+    }
+    result += componentOpenTagClose+componentCloseTag
+    result
   }
 }

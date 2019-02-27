@@ -28,6 +28,7 @@ object Translator {
     //println(translatorService.findParams())
     //println(translatorService.getTemplateNamesPace())
     //println(translatorService.findDependencies())
-    println(translatorService.getVueComponentDependencyMap())
+    //println(translatorService.getVueComponentDependencyMap())
+    println(translatorService.renderVueComponent("my-cmp",List("name","Lastname")))
   }
 }
