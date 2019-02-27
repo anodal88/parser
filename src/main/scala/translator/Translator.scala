@@ -23,12 +23,18 @@ object Translator {
 
   def main(args: Array[String]): Unit = {
 
-    //translatorService.writeComponent("my-custom-component")
+    translatorService.writeComponent()
     //println(translatorService.getTemplateName())
     //println(translatorService.findParams())
     //println(translatorService.getTemplateNamesPace())
     //println(translatorService.findDependencies())
     //println(translatorService.getVueComponentDependencyMap())
-    println(translatorService.renderVueComponent("my-cmp",List("name","Lastname")))
+    //println(translatorService.renderVueComponent("my-cmp",Map("duration" -> "$duration", "summaryList" -> "$summaryList", "favoriteStatus" -> "$favoriteStatus")))
+    //println(translatorService.removeNamespaceTag())
+    //println(translatorService.removeTemplateTag())
+    //println(translatorService.removeOwnParamsTags())
+    //translatorService.replaceCallsRenderingVueComponents()
+    //println(translatorService.getVueTemplate())
+    //println(translatorService.translateIfStatements(translatorService.rawText))
   }
 }

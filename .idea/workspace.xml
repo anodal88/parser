@@ -2,12 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd8ba49d-213d-4ea3-a2a3-58c274d37baa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example.js" beforeDir="false" afterPath="$PROJECT_DIR$/example.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToken.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/META-INF/soyToVueParser.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/ncl.components.c1.soy" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/ncl.components.c1.soy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/vue_template.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/vue_template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyParamToken$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyParamToken.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToken$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Token.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/ifToken$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/ifToken.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,32 +38,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="225">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="31" column="79" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
-              <folding>
-                <element signature="e#20#42#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450">
-              <caret line="147" column="41" lean-forward="true" selection-start-line="147" selection-start-column="41" selection-end-line="147" selection-end-column="41" />
+            <state relative-caret-position="461">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+              <folding>
+                <element signature="e#20#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,19 +53,28 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            <state relative-caret-position="-60">
+              <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="190" column="48" selection-start-line="190" selection-start-column="48" selection-end-line="190" selection-end-column="48" />
+            <state relative-caret-position="234">
+              <caret line="142" column="46" lean-forward="true" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="33" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
               <folding>
-                <element signature="e#20#36#0" expanded="true" />
+                <element signature="e#20#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,7 +97,14 @@
       <find>@</find>
       <find>{@</find>
       <find>@param priceOffer</find>
+      <find>components.c94</find>
       <find>{call</find>
+      <find>write</find>
+      <find>removeOwnParamsTags</find>
+      <find>translateIf</find>
+      <find>c94</find>
+      <find>{if $disclaimer}</find>
+      <find>{$</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,11 +119,11 @@
         <option value="$PROJECT_DIR$/src/main/scala/translator/Parser.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/origin/example.soy" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToVueParserService.scala" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" />
-        <option value="$PROJECT_DIR$/example.js" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" />
+        <option value="$PROJECT_DIR$/example.js" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala" />
       </list>
     </option>
@@ -139,29 +149,29 @@
         <subPane>
           <expand>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -169,7 +179,7 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -178,14 +188,14 @@
               <item name="origin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="scala" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="soy-to-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
               <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -196,14 +206,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551221897261" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551309204527" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -308,13 +318,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43944000" />
+    <option name="totallyTimeSpent" value="73270000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="33" y="-17" width="1334" height="786" extended-state="6" />
+    <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.255796" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25267094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -322,9 +332,9 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3298351" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32833582" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.399361" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
+      <window_info anchor="bottom" x="1920" y="486" width="1872" height="308" id="Run" order="2" weight="0.32800853" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.399361" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -354,12 +364,31 @@
     <option name="version" value="1" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala</url>
+          <line>109</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="rawText" />
-        <watch expression="this.rawText.slice(paramNameStartPos+paramNameStart.size, paramNameEndPos)" />
-        <watch expression="sanitize(this.rawText.slice(paramNameStartPos+paramNameStart.size, paramNameEndPos))" />
         <watch expression="this.rawText.size" />
+        <watch expression="tmpl" />
+        <watch expression="renderIfTemplate(evalExpressions.head,ifBlockContent)" />
+        <watch expression="res.slice(0, startPos)" />
+        <watch expression="res.slice(startPos + start.length, endPos)" />
+        <watch expression="res.slice(endPos + end.length, res.size)" />
       </configuration>
     </watches-manager>
   </component>
@@ -390,52 +419,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/java/lang/String.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala" />
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/java/lang/String.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        <state relative-caret-position="178">
+          <caret line="688" column="18" selection-start-line="688" selection-start-column="18" selection-end-line="688" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+        <state relative-caret-position="75">
+          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/com/sun/xml/internal/ws/util/StringUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="31" column="79" selection-start-line="31" selection-start-column="79" selection-end-line="31" selection-end-column="79" />
+        <state relative-caret-position="375">
+          <caret line="25" column="33" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
           <folding>
             <element signature="e#20#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="190" column="48" selection-start-line="190" selection-start-column="48" selection-end-line="190" selection-end-column="48" />
-          <folding>
-            <element signature="e#20#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        <state relative-caret-position="-60">
+          <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
-          <caret line="147" column="41" lean-forward="true" selection-start-line="147" selection-start-column="41" selection-end-line="147" selection-end-column="41" />
+        <state relative-caret-position="234">
+          <caret line="142" column="46" lean-forward="true" selection-start-line="142" selection-start-column="46" selection-end-line="142" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+          <folding>
+            <element signature="e#20#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

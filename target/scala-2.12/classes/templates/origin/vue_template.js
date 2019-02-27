@@ -1,9 +1,6 @@
 Vue.component(#!SELECTOR!#, {
-    data: function () {
-        return {
-            count: 0
-        }
-    },
+    data: {},
     props: [#!PROPS!#],
-    template: #!TEMPLATE!#
+    template: #!TEMPLATE!#,
+    computed:{}
 })

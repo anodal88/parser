@@ -1,246 +1,166 @@
-{namespace components.ncl}
+{namespace ncl.components}
 
 {template .c100}
-    {@param? isClientSideRender: bool}
-    {@param itineraryId: string}
 
-    {@param desktopImage: [ src: string, alt: string ]}
-    {@param? tabletImage: [ src: string, alt: string ]}
-    {@param? mobileImage: [ src: string, alt: string ]}
-
-    {@param? bindDesktopImage: string }
-    {@param? bindTabletImage: string }
-    {@param? bindMobileImage: string }
-    {@param? bindLinkSocialList: string }
-
+    {@param  desktopImage: [ src: string, alt: string ]}
     {@param? imagePosition: string}
-    {@param? link: [aria: string, href: string, text: string, title: string]}
-    {@param? figcaptionImage: [src: string, alt: string]}
-    {@param? bindFigcaptionImage: string }
-    {@param? figcaptionType: string}
-    {@param? type: string}
-    {@param  linkSocial: list<[icon: string, link: [aria: string, href: string, text: string, title: string]]>|null}
-    {@param  favoriteLink: [ href: string, title: string, aria: string, text: string ]}
+    {@param?  figcaptionImage: [src: string, alt: string]}
+    {@param?  figcaptionType: string}
+    {@param  favoriteStatus: string}
+    {@param linkSocial: list<[
+    link: [ href: string, title: string, aria: string ],
+    icon: string
+    ]>}
+    {@param  favoriteLink: [ href: string, title: string, aria: string ]}
     {@param  favoriteIcon: string}
     {@param  duration: string}
-    {@param  sailingDates: string}
-    {@param? sailingDatesVariantClass: string}
-    {@param? sailingDatesIcon: string}
-    {@param  ship: string}
+    {@param  ships: string}
     {@param  destination: string}
     {@param  embarkationPort: string}
     {@param  title: string}
     {@param summaryList: list<
     [
     image: [ src: string, alt: string ],
-    textVariantClass : string | null,
     text: string,
     link : [ href: string, text: string, title: string, aria: string ] | null
     ]
     >}
-    {@param? bindSummaryList: string}
-
     {@param embarkationPortList: list<
     [
-    city: string,
-    country: string|null
+    embarkationPortCity: string,
+    embarkationPortCountry: string
     ]
     >}
-    {@param? bindEmbarkationPortList: string }
-
-    {@param quantityPorts: string }
+    {@param? quantityPorts: int }
     {@param labelTextSail: string}
     {@param priceSail: string}
     {@param? offer: string}
     {@param? offerDisclaimer: string}
     {@param labelTextOffer: string}
     {@param priceOffer: string}
-
+    {@param merchandisingList: list<
+    [
+    image: [src: string, alt: string],
+    text: string,
+    body: html
+    ]
+    >}
     {@param disclaimer: string}
 
+    {@param offersTitle: string}
     {@param offersList: list<[
     image: [src: string, alt: string],
     text: string,
     body: html
     ]> }
-    {@param? bindOffersList: string }
-
-    {@param callToActionCard: [ href: string, text: string, title: string, aria: string]}
-
+    {@param callToActionCard: [ href: string, text: string, title: string, aria: string ]}
     {@param btnLink: [ href: string, text: string, title: string, aria: string ]}
+    {@param? classAlert: string}
+    {@param? textAlertHeader: string}
+    {@param? textAlert: string}
 
-    {@param? cardAlert: [ class: string, text: string, header: string ]}
-
+    {@param pricingTitles: list<[
+    title: string,
+    price: string | null
+    ]>}
+    {@param pricingDatePrices: list<[
+    departureWeekDay: string,
+    departureMonthDay: string,
+    departureYear: string|null,
+    returnWeekDay: string,
+    returnMonthDay: string,
+    returnYear: string,
+    pricingList: list<[
+    title: string,
+    status: string|null,
+    pricePrimary: string,
+    description: string,
+    priceSecondary: string,
+    merchandisingList: list<[
+    image: [src: string, alt: string]
+    ]>|null,
+    offersList: list<[
+    image: [src: string, alt: string],
+    text: string,
+    body: html
+    ]>|null
+    ]>
+    ]>}
     {@param? pricingOffers: list<[
     image: [src: string, alt: string],
     text: string
     ]>}
 
+
     <!--c100-->
-    <vacations-card-result inline-template
-            {if $isClientSideRender}
-                           initial-type="{$type}"
-                           v-bind:initial-quantity-ports="parseInt({$quantityPorts})"
-                           v-bind:initial-itinerary-id="{$itineraryId}"
-                           v-bind:initial-desktop-image="{$bindDesktopImage}"
-                           v-bind:initial-tablet-image="{$bindTabletImage}"
-                           v-bind:initial-mobile-image="{$bindMobileImage}"
-                           v-bind:initial-link-social-list="{$bindLinkSocialList}"
-                           v-bind:initial-image-position="{$imagePosition}"
-                           v-bind:initial-fig-caption-type="{$figcaptionType}"
-                           v-bind:initial-fig-caption-image="{$bindFigcaptionImage}"
-                           v-bind:initial-duration="{$duration}"
-                           v-bind:initial-sailing-dates="{$sailingDates}"
-                           v-bind:initial-ship="{$ship}"
-                           v-bind:initial-destination="{$destination}"
-                           v-bind:initial-embarkation-port="{$embarkationPort}"
-                           v-bind:initial-embarkation-port-list="{$bindEmbarkationPortList}"
-                           v-bind:initial-summary-list="{$bindSummaryList}"
-                           v-bind:initial-price-sail="{$priceSail}"
-                           v-bind:initial-offer-label="{$offer}"
-                           v-bind:initial-offer-disclaimer="{$offerDisclaimer}"
-                           v-bind:initial-price-offer="{$priceOffer}"
-                           v-bind:initial-offers-list="{$bindOffersList}"
-                           v-bind:initial-disclaimer="{$disclaimer}"
-                           v-bind:initial-card-class-alert="{$cardAlert.class?:''}"
-                           v-bind:initial-card-alert-header="{$cardAlert.header?:''}"
-                           v-bind:initial-card-text-alert="{$cardAlert.text?:''}"
-                           v-bind:initial-call-to-action-card="{lb} 'href': {$callToActionCard.href}, 'text': {$callToActionCard.text}, 'title': {$callToActionCard.title}, 'aria': {$callToActionCard.aria} {rb}"
-            {else}
-             // Server-Side Render
-
-                {let $encodedDestination kind="js"}{$destination}{/let}
-                {let $encodedEmbarkationPort kind="js"}{$embarkationPort}{/let}
-
-                           v-bind:initial-quantity-ports="parseInt({$quantityPorts})"
-                           v-bind:initial-itinerary-id="'{$itineraryId}'"
-                           v-bind:initial-duration="'{$duration}'"
-                           v-bind:initial-ship="'{$ship}'"
-                           v-bind:initial-destination="{$encodedDestination}"
-                           v-bind:initial-embarkation-port="{$encodedEmbarkationPort}"
-                           v-bind:initial-price-sail="{$priceSail}"
-                           v-bind:initial-offer-label="'{$offer}'"
-                           v-bind:initial-offer-disclaimer="'{$offerDisclaimer}'"
-                           v-bind:initial-price-offer="{$priceOffer}"
-                           v-bind:initial-offers-list="[
-                {foreach $o in $offersList}
-                               {let $bodyHtml kind="text"}{$o.body}{/let}
-                               {lb}
-                        'image': {lb}'src': '{$o.image.src}', 'alt': '{$o.image.alt}'{rb},
-                        'text': '{$o.text}',
-                        'body': '{$bodyHtml}',
-                    {rb},
-                {/foreach}
-           ]"
-                           v-bind:initial-call-to-action-card="{lb} 'href': '{$callToActionCard.href}', 'text': '{$callToActionCard.text}', 'title': '{$callToActionCard.title}', 'aria': '{$callToActionCard.aria}' {rb}"
-            {/if}
-            {let $encodedTitle kind="js"}{$title}{/let}
-                           v-bind:initial-favorite-link="{lb} 'href': '{$favoriteLink.href}', 'text': '{$favoriteLink.text}', 'title': '{$favoriteLink.title}', 'aria': '{$favoriteLink.aria}' {rb}"
-                           v-bind:initial-ports-title="{$encodedTitle}"
-                           v-bind:initial-label-text-offer="'{$labelTextOffer}'"
-                           v-bind:initial-label-text-sail="'{$labelTextSail}'"
-                           v-bind:initial-button-link="{lb} 'href': {$btnLink.href}, 'text': '{$btnLink.text}', 'title': '{$btnLink.title}', 'aria': '{$btnLink.aria}' {rb}"
-    >
-
-        <article class="c100" v-bind:class="{lb}open: openMode !== ''{rb}">
-            <div class="c100_card" >
-                <div class="c100_body">
-                    {call components.c94}
-                        {param isClientSideRender: $isClientSideRender /}
-                        {param desktopImage: $desktopImage /}
-                        {param tabletImage: $tabletImage /}
-                        {param mobileImage: $mobileImage /}
-                        {param imagePosition: $imagePosition /}
-                        {param link: $link /}
-                        {param figcaptionImage: $isClientSideRender ?
-                        ['src': 'initialFigCaptionImage.src', 'alt': 'initialFigCaptionImage.alt'] : $figcaptionImage /}
-                        {param type: $type /}
-                        {param figcaptionType: $figcaptionType /}
-                        {param favoriteLink: $isClientSideRender ?
-                        [ 'href': 'LinkData.href', 'text': 'LinkData.text',
-                        'title': 'LinkData.title', 'aria': 'LinkData.aria' ] : $favoriteLink /}
-                        {param favoriteIcon: $favoriteIcon /}
-                        {param linkSocial: $linkSocial /}
-                        {param embarkationPortList: $embarkationPortList /}
-                        {param quantityPorts: $quantityPorts /}
-                        {param summaryList: $summaryList /}
-                        {param duration: $isClientSideRender ? 'initialDuration' : $duration /}
-                        {param sailingDates: $isClientSideRender ? 'initialSailingDates' : $sailingDates /}
-                        {param sailingDatesVariantClass: $sailingDatesVariantClass /}
-                        {param sailingDatesIcon: $sailingDatesIcon /}
-                        {param ship: $isClientSideRender ? 'initialShip' : $ship /}
-                        {param destination: $destination /}
-                        {param embarkationPort: $embarkationPort /}
-                        {param title: $title /}
-                        {param dataImage: $desktopImage.src /}
-                        {param dataTitle: $destination /}
-                    {/call}
-                </div>
-
-                <aside class="c100_aside">
-                    {call components.c92}
-                        {param isClientSideRender: $isClientSideRender /}
-                        {param offersList: $offersList /}
-                        {param bindOffersList: $isClientSideRender ? 'initialOffersList' : '' /}
-                        {param labelTextSail: $isClientSideRender ? 'initialLabelTextSail' : $labelTextSail /}
-                        {param priceSail: $isClientSideRender ? 'initialPriceSail' : $priceSail /}
-                        {param offer: $isClientSideRender ? 'initialOfferLabel' : $offer /}
-                        {param labelTextOffer: $isClientSideRender ? 'initialLabelTextOffer' : $labelTextOffer /}
-                        {param priceOffer: $isClientSideRender ? 'initialPriceOffer' : $priceOffer /}
-                        {param callToActionCard: $isClientSideRender ?
-                        [ 'href': 'initialCallToActionCard.href', 'text': 'initialCallToActionCard.text',
-                        'title': 'initialCallToActionCard.title', 'aria': 'initialCallToActionCard.aria' ] : $callToActionCard /}
-                        {param class: $isClientSideRender ? 'initialCardClassAlert' : ($cardAlert.class?:'') /}
-                        {param textAlertHeader: $isClientSideRender ? 'initialCardAlertHeader' : ($cardAlert.header?:'') /}
-                        {param textAlert: $isClientSideRender ? 'initialCardTextAlert' : ($cardAlert.text?:'') /}
-                    {/call}
-                </aside>
-            </div>
-
-            {if $isClientSideRender or $disclaimer}
-                <div class="c100_disclaimer">
-                <span class="extra -small">
-                    {if $isClientSideRender}
-                        {literal} {{ initialDisclaimer }} {/literal}
-                    {else}
-                        {$disclaimer}
-                    {/if}
-                </span>
-                </div>
-            {/if}
-
-            <div class="c100_modals" v-cloak>
-                 // price details dialog, when tapping on the offers on the results card
-            {call components.c99}
-                {param isClientSideRender: true /}
-                {param duration: 'detailsData ? detailsData.duration : ""' /}
-                {param ship: 'detailsData ? detailsData.ship : ""' /}
-                {param destination: 'detailsData ? detailsData.destination : ""' /}
-                {param embarkationPort: 'detailsData ? detailsData.embarkationPort : ""' /}
-                {param labelTextSail: 'detailsData ? detailsData.label : ""' /}
-                {param priceSail: 'detailsData ? detailsData.price : ""' /}
-                {param offer: 'detailsData ? detailsData.offer : ""' /}
-                {param labelTextOffer: 'detailsData ? detailsData.labelOffer : ""' /}
-                {param priceOffer: 'detailsData ? detailsData.priceOffer : ""' /}
-                {param offersList: [] /}
-                {param bindOffersList: 'detailsData ? detailsData.offersList : ""' /}
-                {param offerDisclaimer: 'detailsData ? detailsData.offerDisclaimer : ""' /}
-                {param btnLink: $btnLink /}
-                {param bindBtnLink: 'detailsData.modalPriceCallToAction' /}
-                {param openMode: 'viewOffers' /}
-            {/call}
-
-                {call components.c150}
-                 // The price grid is always client-side because it is requested from an endpoint on first opening
-                {param isClientSideRender: true /}
-
-                    {param titles: [] /}
-                    {param datePrices: [] /}
-                    {param offers: $pricingOffers /}
+    <article class="c100">
+        <div class="c100_card">
+            <div class="c100_body">
+                {call ncl.components.c94}
+                    {param desktopImage: $desktopImage /}
+                    {param imagePosition: $imagePosition /}
+                    {param figcaptionImage: $figcaptionImage /}
+                    {param figcaptionType: $figcaptionType /}
+                    {param favoriteStatus: $favoriteStatus /}
+                    {param favoriteLink: $favoriteLink /}
+                    {param favoriteIcon: $favoriteIcon /}
+                    {param linkSocial: $linkSocial /}
+                    {param embarkationPortList: $embarkationPortList /}
+                    {param quantityPorts: $quantityPorts /}
+                    {param summaryList: $summaryList /}
+                    {param duration: $duration /}
+                    {param ships: $ships /}
+                    {param destination: $destination /}
+                    {param embarkationPort: $embarkationPort /}
+                    {param title: $title /}
+                    {param dataImage: $desktopImage.src /}
+                    {param dataTitle: $destination /}
+                    {param dataUrl: $callToActionCard.href /}
                 {/call}
-
             </div>
-
-        </article>
-    </vacations-card-result>
+            <aside class="c100_aside">
+                {call ncl.components.c92}
+                    {param merchandisingList: $merchandisingList /}
+                    {param labelTextSail: $labelTextSail /}
+                    {param priceSail: $priceSail /}
+                    {param offer: $offer /}
+                    {param labelTextOffer: $labelTextOffer /}
+                    {param priceOffer: $priceOffer /}
+                    {param callToActionCard: $callToActionCard /}
+                    {param alertClass: $classAlert /}
+                    {param textAlertHeader: $textAlertHeader /}
+                    {param textAlert: $textAlert /}
+                {/call}
+            </aside>
+        </div>
+        {if $disclaimer}
+            <div class="c100_disclaimer">
+                <span class="extra -small">{$disclaimer}</span>
+            </div>
+        {/if}
+        <div class="c100_modals">
+            {call ncl.components.c99}
+                {param class: '-expandable' /}
+                {param duration: $duration /}
+                {param ships: $ships /}
+                {param destination: $destination /}
+                {param embarkationPort: $embarkationPort /}
+                {param labelTextSail: $labelTextSail /}
+                {param priceSail: $priceSail /}
+                {param offer: $offer /}
+                {param labelTextOffer: $labelTextOffer /}
+                {param priceOffer: $priceOffer /}
+                {param offersTitle: $offersTitle /}
+                {param offersList: $offersList /}
+                {param offerDisclaimer: $offerDisclaimer /}
+                {param btnLink: $btnLink /}
+            {/call}
+            {call ncl.components.c150}
+                {param class: '-expandable' /}
+                {param titles: $pricingTitles /}
+                {param datePrices: $pricingDatePrices /}
+                {param offers: $pricingOffers /}
+            {/call}
+        </div>
+    </article>
 {/template}
