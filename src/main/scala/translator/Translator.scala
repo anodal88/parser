@@ -7,7 +7,7 @@ import java.io.File
 
 object Translator {
 
-  val translatorService = new SoyToVueTranslatorService()
+  val translatorService = new SoyToVueTranslator()
 
 
   def writeFile(msg: String) = {
@@ -23,7 +23,7 @@ object Translator {
 
   def main(args: Array[String]): Unit = {
 
-    translatorService.writeComponent()
+    translatorService.exportVueComponent()
     //println(translatorService.getTemplateName())
     //println(translatorService.findParams())
     //println(translatorService.getTemplateNamesPace())
@@ -36,5 +36,6 @@ object Translator {
     //translatorService.replaceCallsRenderingVueComponents()
     //println(translatorService.getVueTemplate())
     //println(translatorService.translateIfStatements(translatorService.rawText))
+    //println(translatorService.insert("Antonio",2,"t"))
   }
 }

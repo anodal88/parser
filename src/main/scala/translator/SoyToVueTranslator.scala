@@ -4,7 +4,14 @@ import java.io._
 import scala.io._
 import scala.collection.mutable.ListBuffer
 
-class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl.components.c1.soy") {
+// TODO: finish if statement translations
+// TODO: finish special tags translations
+// TODO: finish switch tag translation
+// TODO: finish foreach translation
+// TODO: finish for  tag translation
+// TODO: finish var declaration translation
+
+class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.components.c1.soy") {
 
   var params = new ListBuffer[String]()
   var dependencies = new ListBuffer[String]()
@@ -52,6 +59,15 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
 
   val declarationToken = "{let"
 
+  val vueInterpolationStartToken = "{{"
+  val vueInterpolationEndToken = "}}"
+
+  /** ***********************VUE DIRECTIVES ****************************/
+  val vIf = "v-if"
+  val vElseIf = "v-else-if"
+  val vElse = "v-else"
+  val vTemplateStart = "<template"
+  val vTemplateEnd = "</template>"
 
   /**
     * Removes the namespace keywords
@@ -68,9 +84,11 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
   }
 
 
-  def renderIfTemplate(evalExpresion: String, content: String): String = {
-    val r =s"""<div v-if= "${this.sanitize(evalExpresion)}">${content}</div>"""
-    r
+  def renderIfTemplate(evalExpresion: String, vueDirective: String, content: String): String = {
+    val start: String = s"""<template ${vueDirective}"""
+    val end: String = s""">${content}</template>"""
+    val expresion: String = if (evalExpresion.size > 0)s""" = "${this.sanitize(evalExpresion)}"""" else ""
+    start + expresion + end
   }
 
   /**
@@ -79,52 +97,154 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     * @param tmpl
     */
   def translateIfStatements(tmpl: String) = {
-    var template = tmpl
-    //Extract the if statement sub-template
-    //if it is a simple if translate using template from vue
-    //if it is a compound if statement wrap content using a simple div
+    //    var withoutElse =  this.ifStatementTransHelper(tmpl,this.elseToken,this.genericCloseToken,this.endIfToken)
+    //    var withoutElseIf = this.ifStatementTransHelper(tmpl,this.elseIfToken,this.genericCloseToken,"{")
+    //var result = this.ifStatementTransHelper(tmpl, this.ifStartToken, this.genericCloseToken, this.endIfToken)
+    //result = this.ifStatementTransHelper(result, this.elseIfToken, this.genericCloseToken, "{")
+    //this.ifStatementTransHelper(
+      this.ifStatementTransHelper(
+        this.ifStatementTransHelper(
+          tmpl, this.ifStartToken, this.genericCloseToken, this.endIfToken), this.elseIfToken, this.genericCloseToken, "{"
+      )//,this.elseToken,this.vTemplateEnd
+    //)
 
-    while (template.contains(this.ifStartToken)) {
-      val startIf = template.indexOf(this.ifStartToken)
-      val endIfCondition = template.indexOf(this.genericCloseToken, startIf)
-      val endIf = template.indexOf(this.endIfToken, startIf)
-      val ifBlockContent = template.substring(endIfCondition + 1, endIf)
-      val evalExpressions = this.findTokenCollections(template, this.ifStartToken, this.genericCloseToken)
-      val hasElseIf = ifBlockContent.contains(this.elseIfToken)
-      if (!hasElseIf) {
-        //simple if
-        val first = template.slice(0, startIf - 1)
-        val rest = template.slice(endIf + this.endIfToken.size, template.size)
-        val wrapper = this.renderIfTemplate(evalExpressions.head, ifBlockContent)
-        template = first + wrapper + rest
-        // template = template.slice(0,startIf-1)+renderIfTemplate(evalExpressions.head,ifBlockContent)+template.slice(endIf-1,template.size)
-      } else {
-        //complex if statement
-        //TODO: finish compound cases
+  }
+
+
+  def ifStatementTransHelper(tmpl: String, startTag: String, simpleCloseTag: String, closeTag: String): String = {
+    var template = tmpl
+    while (template.contains(startTag)) {
+      val startPos = template.indexOf(startTag)
+
+      val simpleClosePos = template.indexOf(simpleCloseTag, startPos)
+      val closePos = template.indexOf(closeTag, simpleClosePos)
+      val block = template.substring(startPos, closePos + closeTag.size)
+      val blockContent = template.substring(simpleClosePos + 1, closePos)
+      val evalExpression = this.findTokenCollections(block, startTag, simpleCloseTag).head.replace(" ", "")
+
+      val wrapper = this.renderIfTemplate(evalExpression, this.getVueIfDirective(startTag), blockContent)
+      template = startTag match {
+        case this.ifStartToken => {
+          val first = template.slice(0, startPos)
+          val rest = template.slice(closePos + closeTag.size, template.size)
+          first + wrapper + rest
+        }
+        case this.elseIfToken => {
+
+
+          val first = template.slice(0, startPos)
+          //val toEndBlk = template.slice(first.size, template.indexOf(this.vTemplateEnd) + this.vTemplateEnd.size)
+          val rest = template.slice(closePos, template.size)
+          var subTmpl = first + rest
+          val wrapperPosInsert = rest.indexOf(this.vTemplateEnd) + this.vTemplateEnd.size + first.size
+          this.insert((first + rest), wrapperPosInsert, wrapper)
+        }
+        case this.elseToken => wrapper
+        case _ => throw new Exception("Error!!")
       }
     }
     template
   }
 
+  def test(tmpl:String)={
+    var template =tmpl
+    while(template.contains(this.ifStartToken)){
+      val start = template.lastIndexOf(this.ifStartToken)//start from inside to outside
+      val end = template.indexOf(this.endIfToken,start)
+      val block = template.slice(start,end)
+      val elseIfBlocks
+    }
+  }
+
+  def getPosOfClosedTag(source: String, closeTag: String, openTagPos: Int): Int = {
+    val template = source.slice(openTagPos, source.size)
+    val openedTags = template.indexOf(closeTag) + closeTag.size
+    openedTags
+  }
+
+  /**
+    * Get the number of occurrences of a substring
+    *
+    * @param source
+    * @param search
+    * @return
+    */
+  def getOccurrences(source: String, search: String) = {
+    var test = source
+    var count = 0
+    while (test.contains(search)) {
+      count += 1
+      val foundPos = test.indexOf(search)
+      test = test.slice(0, foundPos) + test.slice(foundPos + search.size, test.size)
+    }
+    count
+  }
+
+  /**
+    * Insert a string into another
+    *
+    * @param source
+    * @param pos
+    * @param content
+    */
+  def insert(source: String, pos: Int, content: String) = {
+    source.substring(0, pos) + content + source.substring(pos, source.size)
+  }
+
+  /**
+    *
+    * @param soyIfTag
+    * @return
+    */
+  def getVueIfDirective(soyIfTag: String): String = {
+    soyIfTag match {
+      case this.ifStartToken => this.vIf
+      case this.elseIfToken => this.vElseIf
+      case this.elseToken => this.vElse
+      case _ => throw new Exception("Invalid Soy If tag")
+    }
+  }
+
+
+  /**
+    * Convert literals to vue
+    *
+    * @param tmpl
+    * @return
+    */
+  def translateLiterals(tmpl: String) = {
+    tmpl.replace(this.literalStartToken, this.vueInterpolationStartToken).replace(this.literalEndToken, this.vueInterpolationEndToken)
+  }
+
   /**
     * Translate all prints from soy to vue interpolation
+    *
     * @param tmpl
     * @return
     */
   def translatePrints(tmpl: String): String = {
-    this.replacePrints(
-      this.replacePrints(
-        tmpl, this.printStartToken, this.genericCloseToken
-      ), this.printLiteralToken, this.genericCloseToken)
+    val vueInterpolationStart = "{{"
+    val vueInterpolationEnd = "}}"
+    this.replaceOpenCloseTags(
+      this.replaceOpenCloseTags(
+        tmpl, this.printStartToken, this.genericCloseToken, vueInterpolationStart, vueInterpolationEnd
+      ), this.printLiteralToken, this.genericCloseToken, vueInterpolationStart, vueInterpolationEnd)
   }
 
-  def replacePrints(tmpl: String, start: String, end: String): String = {
+  /**
+    *
+    * @param tmpl
+    * @param start
+    * @param end
+    * @return
+    */
+  def replaceOpenCloseTags(tmpl: String, start: String, end: String, startReplace: String, endReplace: String): String = {
     var res = tmpl
     while (res.contains(start)) {
       val startPos = res.indexOf(start)
       val endPos = res.indexOf(end, startPos)
       if (startPos > 0 && endPos > 0) {
-        res = res.slice(0, startPos) + "{{" + res.slice(startPos + start.length, endPos) + "}}" + res.slice(endPos + end.length, res.size)
+        res = res.slice(0, startPos) + startReplace + res.slice(startPos + start.length, endPos) + endReplace + res.slice(endPos + end.length, res.size)
       }
     }
     res
@@ -168,18 +288,25 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     result
   }
 
+  /**
+    * Lint the given content
+    *
+    * @param content
+    * @return
+    */
   def lintContent(content: String): String = {
-    ""
+    content.replaceAll("</", "\n</")
+      .replaceAll(">", ">\n")
+      .replaceAll("\n\n|\n\r", "\n")
   }
 
   /**
-    * Create a filename with the component
+    * Export the component
     *
-    * @param component_selector
-    * @param props
-    * @param template
+    * @param singleFile  wether if the component will be in one file or in folder containing 3 files (js, scss, html)
+    * @param destination is the destination path where the component will be saved
     */
-  def writeComponent() = {
+  def exportVueComponent(singleFile: Boolean = true, destination: String = "") = {
     val cmpName = (this.getTemplateNamesPace() + "-" + this.getTemplateName())
       .replace(".", "-")
       .replace(" ", "")
@@ -320,7 +447,7 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     while (pos < template.size) {
       val paramNameStartPos = template.indexOf(paramNameStart, pos)
       val paramNameEndPos = template.indexOf(paramNameEnd, paramNameStartPos)
-      if (paramNameStartPos > 0 && paramNameEndPos > 0) {
+      if (paramNameStartPos >= 0 && paramNameEndPos >= 0) {
         val testValue = template.slice(paramNameStartPos + paramNameStart.size, paramNameEndPos)
         result += {
           if (sanitizeValue) this.sanitize(testValue) else testValue
@@ -348,17 +475,22 @@ class SoyToVueTranslatorService(val templateName: String = "templates/origin/ncl
     * @return
     */
   def getVueTemplate(): String = {
-    val template = this.replaceCallsRenderingVueComponents(
-      this.removeNamespaceTag(
-        this.removeTemplateTag(
-          this.removeOwnParamsTags(
-            this.translateIfStatements(
-              this.translatePrints(this.rawText)
+    val template =
+      this.lintContent(
+        this.translatePrints(
+          this.replaceCallsRenderingVueComponents(
+            this.removeNamespaceTag(
+              this.removeTemplateTag(
+                this.removeOwnParamsTags(
+                  this.translateIfStatements(
+                    this.rawText
+                  )
+                )
+              )
             )
           )
-        )
-      )
-    )
+        ))
+
     template
   }
 

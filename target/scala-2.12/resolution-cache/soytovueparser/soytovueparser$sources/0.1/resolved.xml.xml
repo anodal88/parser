@@ -4,7 +4,7 @@
 		module="soytovueparser$sources"
 		revision="0.1"
 		status="integration"
-		publication="20190226084418"
+		publication="20190228084336"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
