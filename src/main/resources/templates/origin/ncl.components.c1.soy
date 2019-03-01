@@ -1,12 +1,33 @@
+{literal}Antonio{/literal}
+
+{foreach $element in $elements}
+ <span>{$element}</span>
+     {foreach $element in $elements}
+      <p>Lore ipsun as hasdjk adkhgasd jasjhdas hd f</p>
+      {ifempty}
+      No hay elementos
+     {/foreach}
+{/foreach}
+
 {if $disclaimer==1}
-   <span>test</span>
-    {if $disclaimer}
-       <div class="c100_disclaimer">
-           <span class="extra -small">{$disclaimer}</span>
-       </div>
-   {/if}
+   <span>test 1</span>
 {elseif $disclaimer==5}
-   <span>else if test ..</span>
+   <span>else if test 5</span>
+{elseif $disclaimer==6}
+   {if $disclaimer==1}
+    <b>Hello</b>
+    {elseif $disclaimer==61}
+    elseif........
+    {else}
+    else........
+   {/if}
+   <span>else if test 6</span>
 {else}
-   <span>else test ..</span>
+   <span>else test</span>
 {/if}
+
+
+
+
+
+

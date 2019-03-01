@@ -2,19 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd8ba49d-213d-4ea3-a2a3-58c274d37baa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/-l.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/target/config-classes/$171e96805b92e76ec4a2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/target/config-classes/$2e9aeb72e60134a0d4a5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/target/config-classes/$506f4aed40ced6588617.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/target/config-classes/$66d5e7dac7fdff8504e7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/soyToVueParser-build.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/soyToVueParser-build.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/soyToVueParser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/soyToVueParser.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Write.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/example.js" beforeDir="false" afterPath="$PROJECT_DIR$/example.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example.soy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$06d2f2e7ef9a88757119$.class" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$2e9aeb72e60134a0d4a5$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$06d2f2e7ef9a88757119.cache" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$66d5e7dac7fdff8504e7.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$06d2f2e7ef9a88757119.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$145763232cf47dcefe4d$.class" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$506f4aed40ced6588617$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$145763232cf47dcefe4d.cache" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$506f4aed40ced6588617.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$145763232cf47dcefe4d.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$331011d6e8ce5c1d85cd$.class" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$66d5e7dac7fdff8504e7$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$331011d6e8ce5c1d85cd.cache" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$2e9aeb72e60134a0d4a5.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$331011d6e8ce5c1d85cd.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$a6d8a97431c88a5c90ab$.class" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$171e96805b92e76ec4a2$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$a6d8a97431c88a5c90ab.cache" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/config-classes/$171e96805b92e76ec4a2.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$a6d8a97431c88a5c90ab.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/default/soy-to-vue-build/scala_2.12/sbt_1.0/0.1.0-SNAPSHOT/resolved.xml.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/default/soy-to-vue-build/scala_2.12/sbt_1.0/0.1.0-SNAPSHOT/resolved.xml.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/default/soy-to-vue-build/scala_2.12/sbt_1.0/0.1.0-SNAPSHOT/resolved.xml.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/default/soy-to-vue-build/scala_2.12/sbt_1.0/0.1.0-SNAPSHOT/resolved.xml.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-compile-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-compile-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-compile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-compile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-optional.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-optional.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-provided.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-provided.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-runtime-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-runtime-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-runtime.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-runtime.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-scala-tool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-scala-tool.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-test-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-test-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/scala-2.12/sbt-1.0/resolution-cache/reports/default-soy-to-vue-build-test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/inputs" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/inputs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/output" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/$global/update/$global/streams/update_cache_2.12/output" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/compile/dependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/compile/dependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/compile/exportedProducts/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/compile/exportedProducts/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/compile/externalDependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/compile/externalDependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/compile/managedClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/compile/managedClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/runtime/dependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/runtime/dependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/runtime/exportedProducts/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/runtime/exportedProducts/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/runtime/fullClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/runtime/fullClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/streams/runtime/internalDependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/project/target/streams/runtime/internalDependencyClasspath/$global/streams/export" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/.history" beforeDir="false" afterPath="$PROJECT_DIR$/target/.history" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/ncl.components.c1.soy" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/ncl.components.c1.soy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService$.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslatorService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/Translator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/templates/origin/vue_template.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslator$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslator$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/translator/SoyToVueTranslator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-compile-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-compile-internal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-compile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-compile.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-optional.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-optional.xml" afterDir="false" />
@@ -26,12 +66,33 @@
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-scala-tool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-scala-tool.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-test-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-test-internal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser$sources-test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-compile-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-compile-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-compile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-compile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-optional.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-optional.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-provided.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-provided.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-runtime-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-runtime-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-runtime.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-runtime.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-scala-tool.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-scala-tool.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-test-internal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-test-internal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/reports/soytovueparser-soytovueparser_2.12-test.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser$sources/0.1/resolved.xml.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser$sources/0.1/resolved.xml.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser$sources/0.1/resolved.xml.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser$sources/0.1/resolved.xml.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser_2.12/0.1/resolved.xml.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser_2.12/0.1/resolved.xml.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser_2.12/0.1/resolved.xml.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/resolution-cache/soytovueparser/soytovueparser_2.12/0.1/resolved.xml.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/streams/$global/$global/dumpStructure/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/$global/dumpStructure/$global/streams/out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/streams/$global/ivyConfiguration/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/ivyConfiguration/$global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/update_cache_2.12/inputs" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/update_cache_2.12/inputs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/update_cache_2.12/output" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/update/$global/streams/update_cache_2.12/output" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/streams/$global/updateClassifiers/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/$global/updateClassifiers/$global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/externalDependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/externalDependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/managedClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/managedClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/runtime/externalDependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/runtime/externalDependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/runtime/managedClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/runtime/managedClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/test/externalDependencyClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/externalDependencyClasspath/$global/streams/export" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/test/managedClasspath/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/managedClasspath/$global/streams/export" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,20 +111,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="225">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="e#20#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="180" column="27" selection-start-line="180" selection-start-column="27" selection-end-line="180" selection-end-column="27" />
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example.js">
+        <entry file="file://$PROJECT_DIR$/-l.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+            <state relative-caret-position="308">
+              <caret line="31" column="39" lean-forward="true" selection-end-line="46" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -71,17 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+            <state relative-caret-position="105">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -116,6 +180,12 @@
       <find>translateif</find>
       <find>StringBuilder</find>
       <find>getVueTem</find>
+      <find>export</find>
+      <find>translateFor</find>
+      <find>rans</find>
+      <find>sanit</find>
+      <find>translateF</find>
+      <find>getIfEmptyWrapper</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,10 +201,10 @@
         <option value="$PROJECT_DIR$/src/main/scala/origin/example.soy" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToVueParserService.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslatorService.scala" />
-        <option value="$PROJECT_DIR$/example.js" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/Translator.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js" />
+        <option value="$PROJECT_DIR$/example.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy" />
         <option value="$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala" />
       </list>
@@ -147,9 +217,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1920" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="x" value="33" />
+    <option name="y" value="-17" />
+    <option name="width" value="1334" />
+    <option name="height" value="786" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -157,7 +228,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -201,16 +271,32 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="origin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soyToVueParser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soy-to-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="translator" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551394288839" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551422505255" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lyssa-mocks" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -275,7 +361,7 @@
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="soy-to-vue [file:/home/anodal/src/soy-to-vue/]" />
+                <option name="name" value="soy-to-vue [file:/home/antonio/Desktop/soy-to-vue/]" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
@@ -289,7 +375,6 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="3102377184000" />
         <entry key="$PROJECT_DIR$/build.sbt" value="1661998461" />
         <entry key="$PROJECT_DIR$/project/build.properties" value="2567920773" />
       </map>
@@ -316,17 +401,18 @@
       <workItem from="1551361088373" duration="91000" />
       <workItem from="1551361207923" duration="121000" />
       <workItem from="1551361398887" duration="22101000" />
+      <workItem from="1551409760042" duration="12177000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97372000" />
+    <option name="totallyTimeSpent" value="115009000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="33" y="-17" width="1334" height="786" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26228634" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1537867" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -335,19 +421,19 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
-      <window_info anchor="bottom" x="1920" y="486" width="1872" height="308" id="Run" order="2" weight="0.32800853" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.399361" />
+      <window_info anchor="bottom" x="1920" y="486" width="1872" height="308" id="Run" order="2" weight="0.3268366" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3988006" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.3298351" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3291714" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32833582" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3290735" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Messages" order="14" weight="0.3290735" />
+      <window_info anchor="bottom" id="Messages" order="14" weight="0.32833582" />
       <window_info anchor="bottom" id="SBT Console" order="15" />
       <window_info anchor="right" id="Maven-2 Build" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -370,15 +456,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala</url>
-          <line>102</line>
+          <line>229</line>
           <properties />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala</url>
-          <line>180</line>
-          <properties />
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -387,17 +467,25 @@
         <watch expression="rawText" />
         <watch expression="this.rawText.size" />
         <watch expression="tmpl" />
-        <watch expression="template.contains(startTag)" />
-        <watch expression="source.substring(0, pos - 1) + content + source.substring(pos, source.size)" />
-        <watch expression="source.substring(0, pos - 1)" />
+        <watch expression="template" />
+        <watch expression="block" />
+        <watch expression="forBlockContent.slice(0,ifEmptyStartPos)" />
+        <watch expression="forBlockContent.slice(0,forBlockContent.indexOf(this.ifEmptyToken))" />
       </configuration>
     </watches-manager>
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>ifVueWrapper</expression-string>
+        <language-id>Scala</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/scala/Parser.scala" />
-    <entry file="file://$PROJECT_DIR$/Write.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Write.txt" />
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.8-sources.jar!/scala/collection/immutable/List.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -405,13 +493,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/example.soy" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/example.soy" />
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.8-sources.jar!/scala/package.scala">
       <provider selected="true" editor-type-id="text-editor">
@@ -421,20 +503,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToken.scala" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/com/sun/xml/internal/ws/util/StringUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/com/sun/xml/internal/ws/util/StringUtils.class" />
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.8.jar!/scala/package.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -442,38 +511,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/java/lang/String.class">
+    <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk/jre/lib/rt.jar!/java/lang/String.class" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/vue_template.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="586" column="15" selection-start-line="586" selection-start-column="15" selection-end-line="586" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+        <state relative-caret-position="240">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.attach_pid15708">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/translator/Translator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#20#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/origin/ncl.components.c1.soy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/-l.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="31" column="39" lean-forward="true" selection-end-line="46" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/translator/SoyToVueTranslator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="180" column="27" selection-start-line="180" selection-start-column="27" selection-end-line="180" selection-end-column="27" />
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>

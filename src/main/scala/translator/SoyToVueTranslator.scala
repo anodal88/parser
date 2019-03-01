@@ -1,14 +1,12 @@
 package translator
 
 import java.io._
+
 import scala.io._
 import scala.collection.mutable.ListBuffer
-
-// TODO: finish if statement translations
+// TODO: identify required from optional parameters
 // TODO: finish special tags translations
 // TODO: finish switch tag translation
-// TODO: finish foreach translation
-// TODO: finish for  tag translation
 // TODO: finish var declaration translation
 
 class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.components.c1.soy") {
@@ -62,12 +60,20 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
   val vueInterpolationStartToken = "{{"
   val vueInterpolationEndToken = "}}"
 
-  /** ***********************VUE DIRECTIVES ****************************/
+  /** ******** VUE DIRECTIVES *************/
   val vIf = "v-if"
   val vElseIf = "v-else-if"
   val vElse = "v-else"
   val vTemplateStart = "<template"
   val vTemplateEnd = "</template>"
+
+  val fnTemplate = ""
+  val vueCmpSelectorTmplToken = "{SELECTOR}"
+  val vueCmpDataTmplToken = "{DATA}"
+  val vueCmpPropsTmplToken = "{PROPS}"
+  val vueCmpTemplateTmplToken = "{TEMPLATE}"
+  val vueCmpComputedTmplToken = "{COMPUTED}"
+  val vueComponentTemplate = s"Vue.component(${vueCmpSelectorTmplToken}, {data: {${vueCmpDataTmplToken}},props:[${vueCmpPropsTmplToken}],computed:{${vueCmpComputedTmplToken}},template: ${vueCmpTemplateTmplToken})"
 
   /**
     * Removes the namespace keywords
@@ -91,112 +97,74 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
     start + expresion + end
   }
 
+
   /**
-    * This is the function in charge of if elseif else statements translations
+    * Translate if statements block by block starting from inside to outside
     *
     * @param tmpl
+    * @return
     */
-  def translateIfStatements(tmpl: String) = {
-    //    var withoutElse =  this.ifStatementTransHelper(tmpl,this.elseToken,this.genericCloseToken,this.endIfToken)
-    //    var withoutElseIf = this.ifStatementTransHelper(tmpl,this.elseIfToken,this.genericCloseToken,"{")
-    //var result = this.ifStatementTransHelper(tmpl, this.ifStartToken, this.genericCloseToken, this.endIfToken)
-    //result = this.ifStatementTransHelper(result, this.elseIfToken, this.genericCloseToken, "{")
-    //this.ifStatementTransHelper(
-      this.ifStatementTransHelper(
-        this.ifStatementTransHelper(
-          tmpl, this.ifStartToken, this.genericCloseToken, this.endIfToken), this.elseIfToken, this.genericCloseToken, "{"
-      )//,this.elseToken,this.vTemplateEnd
-    //)
-
-  }
-
-
-  def ifStatementTransHelper(tmpl: String, startTag: String, simpleCloseTag: String, closeTag: String): String = {
+  def translateIfStatements(tmpl: String): String = {
     var template = tmpl
-    while (template.contains(startTag)) {
-      val startPos = template.indexOf(startTag)
-
-      val simpleClosePos = template.indexOf(simpleCloseTag, startPos)
-      val closePos = template.indexOf(closeTag, simpleClosePos)
-      val block = template.substring(startPos, closePos + closeTag.size)
-      val blockContent = template.substring(simpleClosePos + 1, closePos)
-      val evalExpression = this.findTokenCollections(block, startTag, simpleCloseTag).head.replace(" ", "")
-
-      val wrapper = this.renderIfTemplate(evalExpression, this.getVueIfDirective(startTag), blockContent)
-      template = startTag match {
-        case this.ifStartToken => {
-          val first = template.slice(0, startPos)
-          val rest = template.slice(closePos + closeTag.size, template.size)
-          first + wrapper + rest
-        }
-        case this.elseIfToken => {
-
-
-          val first = template.slice(0, startPos)
-          //val toEndBlk = template.slice(first.size, template.indexOf(this.vTemplateEnd) + this.vTemplateEnd.size)
-          val rest = template.slice(closePos, template.size)
-          var subTmpl = first + rest
-          val wrapperPosInsert = rest.indexOf(this.vTemplateEnd) + this.vTemplateEnd.size + first.size
-          this.insert((first + rest), wrapperPosInsert, wrapper)
-        }
-        case this.elseToken => wrapper
-        case _ => throw new Exception("Error!!")
+    while (template.contains(this.ifStartToken)) {
+      val start = template.lastIndexOf(this.ifStartToken)
+      //start from inside to outside
+      val end = template.indexOf(this.endIfToken, start)
+      var block = template.slice(start, end + this.endIfToken.size)
+      val wrapperBuffer = new ListBuffer[String]()
+      val posIfEnd = {
+        if (block.indexOf(this.elseIfToken) >= 0)
+          block.indexOf(this.elseIfToken)
+        else if (block.indexOf(this.elseToken) >= 0)
+          block.indexOf(this.elseToken)
+        else if (block.indexOf(this.endIfToken) >= 0)
+          block.indexOf(this.endIfToken)
+        else
+          end
       }
+      val ifBlock = template.slice(start, end)
+      if (ifBlock.size > 0) {
+        val simpleClosePos = block.indexOf(this.genericCloseToken)
+        val blockContent = block.substring(simpleClosePos + 1, posIfEnd)
+        val evalExpression = this.findTokenCollections(block, this.ifStartToken, this.genericCloseToken)
+          .head.replace(" ", "")
+        val ifVueWrapper = this.renderIfTemplate(evalExpression, this.getVueIfDirective(this.ifStartToken), blockContent)
+        wrapperBuffer += ifVueWrapper
+      }
+
+      while (block.contains(this.elseIfToken)) {
+        val elseIfCloseBlock = "{else"
+        val startEif = block.indexOf(this.elseIfToken)
+        val endEif = block.indexOf(elseIfCloseBlock, startEif + 1)
+        val elseIfContent = block.slice(block.indexOf(this.genericCloseToken, startEif + 1) + this.genericCloseToken.size, endEif)
+        val elseIfEvalExpr = this.findTokenCollections(block, this.elseIfToken, this.genericCloseToken).head.replace(" ", "")
+        val elseIfVueWrapper = this.renderIfTemplate(elseIfEvalExpr, this.getVueIfDirective(this.elseIfToken), elseIfContent)
+        wrapperBuffer += elseIfVueWrapper
+        val head = block.slice(0, startEif)
+        val tail = block.slice(endEif, block.size)
+        block = head + tail
+      }
+
+      if (block.contains(this.elseToken)) {
+        val elseStart = block.indexOf(this.elseToken)
+        val elseBlockContent = block.slice(elseStart + this.elseToken.size, block.indexOf(this.endIfToken))
+        val elseWrapper = this.renderIfTemplate("", this.getVueIfDirective(this.elseToken), elseBlockContent)
+        wrapperBuffer += elseWrapper
+      }
+      val newHeadBlock = template.slice(0, start)
+      val newTailBlock = template.slice(end + this.endIfToken.size, template.size)
+      template = newHeadBlock + wrapperBuffer.mkString("\n") + newTailBlock
     }
     template
   }
 
-  def test(tmpl:String)={
-    var template =tmpl
-    while(template.contains(this.ifStartToken)){
-      val start = template.lastIndexOf(this.ifStartToken)//start from inside to outside
-      val end = template.indexOf(this.endIfToken,start)
-      val block = template.slice(start,end)
-      val elseIfBlocks
-    }
-  }
-
-  def getPosOfClosedTag(source: String, closeTag: String, openTagPos: Int): Int = {
-    val template = source.slice(openTagPos, source.size)
-    val openedTags = template.indexOf(closeTag) + closeTag.size
-    openedTags
-  }
-
-  /**
-    * Get the number of occurrences of a substring
-    *
-    * @param source
-    * @param search
-    * @return
-    */
-  def getOccurrences(source: String, search: String) = {
-    var test = source
-    var count = 0
-    while (test.contains(search)) {
-      count += 1
-      val foundPos = test.indexOf(search)
-      test = test.slice(0, foundPos) + test.slice(foundPos + search.size, test.size)
-    }
-    count
-  }
-
-  /**
-    * Insert a string into another
-    *
-    * @param source
-    * @param pos
-    * @param content
-    */
-  def insert(source: String, pos: Int, content: String) = {
-    source.substring(0, pos) + content + source.substring(pos, source.size)
-  }
 
   /**
     *
     * @param soyIfTag
     * @return
     */
-  def getVueIfDirective(soyIfTag: String): String = {
+  private def getVueIfDirective(soyIfTag: String): String = {
     soyIfTag match {
       case this.ifStartToken => this.vIf
       case this.elseIfToken => this.vElseIf
@@ -213,7 +181,55 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
     * @return
     */
   def translateLiterals(tmpl: String) = {
-    tmpl.replace(this.literalStartToken, this.vueInterpolationStartToken).replace(this.literalEndToken, this.vueInterpolationEndToken)
+    tmpl.replace(this.literalStartToken, "").replace(this.literalEndToken, "")
+  }
+
+  def getIfEmptyWrapper(collection: String, content: String): String = {
+    s"""${this.vTemplateStart} v-show="!(${collection})">${content}${this.vTemplateEnd}"""
+  }
+
+  def getVueForWrapper(evalExpr: String, content: String): String = {
+    s"""${this.vTemplateStart} v-for="${evalExpr}">${content}${this.vTemplateEnd}"""
+  }
+
+  /**
+    * Translate Loop structures from Closure to Vue
+    * @param tmpl
+    * @return
+    */
+  def translateForStatements(tmpl: String): String = {
+
+    def loopTransHelper(source: String, startTag: String, endTag: String): String = {
+      var template = source
+      while (template.contains(startTag)) {
+        val forStart = template.lastIndexOf(startTag)
+        val forEnd = template.indexOf(endTag, forStart)
+        val forBlock = template.slice(forStart, forEnd + endTag.size)
+        var ifEmptyWrapper = ""
+        var forBlockContent = forBlock.slice(forBlock.indexOf(this.genericCloseToken) + this.genericCloseToken.size, forBlock.size - endTag.size)
+        val forEvalExpr = this.sanitize(this.findTokenCollections(forBlock, startTag, this.genericCloseToken).head, false)
+        if (forBlock.contains(this.ifEmptyToken)) {
+          //Extract this part from the forBlock b/c vue do not support it and expose it as a separate condition
+          val ifEmptyStartPos = forBlock.indexOf(this.ifEmptyToken)
+          val ifEmptyContent = forBlock.slice(ifEmptyStartPos + this.ifEmptyToken.size, forBlock.size - endTag.size)
+          val loopCollection = forEvalExpr.slice(forEvalExpr.indexOf(this.forInToken) + this.forInToken.size, forEvalExpr.size)
+          ifEmptyWrapper = this.getIfEmptyWrapper(loopCollection, ifEmptyContent)
+          forBlockContent = forBlockContent.slice(0,forBlockContent.indexOf(this.ifEmptyToken))
+        }
+        val vueForWrapper = this.getVueForWrapper(forEvalExpr, forBlockContent)
+        val head = template.slice(0, forStart)
+        val tail = template.slice(forEnd + endTag.size, template.size)
+        template = head + vueForWrapper + {
+          if (ifEmptyWrapper.size > 0) ifEmptyWrapper else ""
+        } + tail
+      }
+      template
+    }
+
+   // loopTransHelper(
+      loopTransHelper(tmpl, this.foreachToken, this.foreachCloseToken)//,
+    //  this.forToken, this.endForToken
+   // )
   }
 
   /**
@@ -223,32 +239,27 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
     * @return
     */
   def translatePrints(tmpl: String): String = {
+
+    def replaceOpenCloseTags(tmpl: String, start: String, end: String, startReplace: String, endReplace: String): String = {
+      var res = tmpl
+      while (res.contains(start)) {
+        val startPos = res.indexOf(start)
+        val endPos = res.indexOf(end, startPos)
+        if (startPos > 0 && endPos > 0) {
+          res = res.slice(0, startPos) + startReplace + res.slice(startPos + start.length, endPos) + endReplace + res.slice(endPos + end.length, res.size)
+        }
+      }
+      res
+    }
+
     val vueInterpolationStart = "{{"
     val vueInterpolationEnd = "}}"
-    this.replaceOpenCloseTags(
-      this.replaceOpenCloseTags(
+    replaceOpenCloseTags(
+      replaceOpenCloseTags(
         tmpl, this.printStartToken, this.genericCloseToken, vueInterpolationStart, vueInterpolationEnd
       ), this.printLiteralToken, this.genericCloseToken, vueInterpolationStart, vueInterpolationEnd)
   }
 
-  /**
-    *
-    * @param tmpl
-    * @param start
-    * @param end
-    * @return
-    */
-  def replaceOpenCloseTags(tmpl: String, start: String, end: String, startReplace: String, endReplace: String): String = {
-    var res = tmpl
-    while (res.contains(start)) {
-      val startPos = res.indexOf(start)
-      val endPos = res.indexOf(end, startPos)
-      if (startPos > 0 && endPos > 0) {
-        res = res.slice(0, startPos) + startReplace + res.slice(startPos + start.length, endPos) + endReplace + res.slice(endPos + end.length, res.size)
-      }
-    }
-    res
-  }
 
   /**
     * Removes all soy template self params tags
@@ -312,14 +323,17 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
       .replace(" ", "")
     val cmpTemplate = this.getVueTemplate()
     val cmpProps = this.getParams()
-
+    val stringComputed = "" // TODO: calculate the computed functions
+    val stringData = "" // TODO: Calculate data
     val stringProps = cmpProps.map(e => s"'$e'").mkString(" , ")
-    val body = getRawText("templates/origin/vue_template.js")
-      .replace("#!PROPS!#", stringProps)
-      .replace("#!SELECTOR!#", s"'${cmpName}'")
-      .replace("#!TEMPLATE!#", s"`${cmpTemplate}`")
+    val body = this.vueComponentTemplate
+      .replace(this.vueCmpPropsTmplToken, stringProps)
+      .replace(this.vueCmpSelectorTmplToken, s"'${cmpName}'")
+      .replace(this.vueCmpTemplateTmplToken, s"`${cmpTemplate}`")
+      .replace(this.vueCmpComputedTmplToken, s"${stringComputed}")
+      .replace(this.vueCmpDataTmplToken, s"${stringData}")
 
-    val writer = new PrintWriter(new File("example.js"))
+    val writer = new PrintWriter(new File(s"${cmpName}.js"))
     writer.write(body)
     writer.close()
   }
@@ -465,8 +479,11 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
     * @param str
     * @return
     */
-  def sanitize(str: String): String = {
-    str.replaceAll("\\.|_|\\*| |\\?|\\$", "")
+  def sanitize(str: String, removesSpaces: Boolean = true): String = {
+    val exp = "\\.|_|\\*" + {
+      if (removesSpaces) "| " else ""
+    } + "|\\?|\\$"
+    str.replaceAll(exp, "")
   }
 
   /**
@@ -477,20 +494,24 @@ class SoyToVueTranslator(val templateName: String = "templates/origin/ncl.compon
   def getVueTemplate(): String = {
     val template =
       this.lintContent(
-        this.translatePrints(
-          this.replaceCallsRenderingVueComponents(
-            this.removeNamespaceTag(
-              this.removeTemplateTag(
-                this.removeOwnParamsTags(
-                  this.translateIfStatements(
-                    this.rawText
+        this.translateIfStatements(
+          this.translateLiterals(
+            this.translateForStatements(
+              this.translatePrints(
+                this.replaceCallsRenderingVueComponents(
+                  this.removeNamespaceTag(
+                    this.removeTemplateTag(
+                      this.removeOwnParamsTags(
+                        this.rawText
+                      )
+                    )
                   )
                 )
               )
             )
           )
-        ))
-
+        )
+      )
     template
   }
 
