@@ -28,7 +28,7 @@ object Translator {
     //println(translatorService.findParams())
     //println(translatorService.getTemplateNamesPace())
     //println(translatorService.findDependencies())
-    //println(translatorService.getVueComponentDependencyMap())
+    //println(translatorService.getComponentBindings())
     //println(translatorService.renderVueComponent("my-cmp",Map("duration" -> "$duration", "summaryList" -> "$summaryList", "favoriteStatus" -> "$favoriteStatus")))
     //println(translatorService.removeNamespaceTag())
     //println(translatorService.removeTemplateTag())

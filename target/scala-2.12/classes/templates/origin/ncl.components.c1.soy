@@ -91,6 +91,7 @@
     text: string
     ]>}
 
+    {let $name: 'Antonio' /}
 
     {let $offer_3 kind="html"}
         <ul class="listing">
@@ -114,12 +115,22 @@
     {switch $numMarbles}
         {case 0}
             You have no marbles.
+            {for $i in range($numLines)}
+              Line {$i + 1} of {$numLines}.<br>
+            {/for}
+
         {case 1, 2, 3}
             You have a normal number of marbles.
         {default}  // 4 or more
     You have more marbles than you know what to do with.
     {/switch}
 
+{foreach $operand in $operands}
+  {if not isFirst($operand)} + {/if}
+  {$operand}
+ {ifempty}
+  0
+{/foreach}
 
 
     <!--c100-->
@@ -166,9 +177,28 @@
         {if $disclaimer}
             <div class="c100_disclaimer">
                 <span class="extra -small">{$disclaimer}</span>
+                <span class="extra -small">{print disclaimer_2}</span>
             </div>
+            {elseif $disclaimer==2}
+             <div class="c100_disclaimer">
+                            <span class="extra -small">{$disclaimer3}</span>
+                            <span class="extra -small">{print disclaimer_3}</span>
+                        </div>
+            {elseif $disclaimer==3}
+            <div class="c100_disclaimer">
+                                        <span class="extra -small">{$disclaimer4}</span>
+                                        <span class="extra -small">{print disclaimer_4}</span>
+                                    </div>
+                                    {else}
+                                    elseblock sdfsdf sdf s
         {/if}
         <div class="c100_modals">
+         {call ncl.components.c150}
+                        {param class: '-expandable' /}
+                        {param titles: $pricingTitles /}
+                        {param datePrices: $pricingDatePrices /}
+                        {param offers: $pricingOffers /}
+                    {/call}
             {call ncl.components.c99}
                 {param class: '-expandable' /}
                 {param duration: $duration /}
