@@ -1,12 +1,16 @@
 Vue.component('ncl-components-c100', {data: {},props:{pricingOffers:{ required: false , type: Array } , pricingDatePrices:{ required: true , type: Array } , pricingTitles:{ required: true , type: Array } , textAlert:{ required: false , type: String } , textAlertHeader:{ required: false , type: String } , classAlert:{ required: false , type: String } , btnLink:{ required: true , type: Array } , callToActionCard:{ required: true , type: Array } , offersList:{ required: true , type: Array } , offersTitle:{ required: true , type: String } , disclaimer:{ required: true , type: String } , merchandisingList:{ required: true , type: Array } , priceOffer:{ required: true , type: String } , labelTextOffer:{ required: true , type: String } , offerDisclaimer:{ required: false , type: String } , offer:{ required: false , type: String } , priceSail:{ required: true , type: String } , labelTextSail:{ required: true , type: String } , quantityPorts:{ required: false , type: Number } , embarkationPortList:{ required: true , type: Array } , summaryList:{ required: true , type: Array } , title:{ required: true , type: String } , embarkationPort:{ required: true , type: String } , destination:{ required: true , type: String } , ships:{ required: true , type: String } , duration:{ required: true , type: String } , favoriteIcon:{ required: true , type: String } , favoriteLink:{ required: true , type: Array } , linkSocial:{ required: true , type: Array } , favoriteStatus:{ required: true , type: String } , figcaptionType:{ required: false , type: Boolean } , figcaptionImage:{ required: false , type: Array } , imagePosition:{ required: false , type: Number } , desktopImage:{ required: true , type: Array }},computed:{
-offer_3: function () {
- return `      <ul class="listing">        <li class="listing_item">Choose Up To 4 Free Offers:</li>        <li class="listing_item">1. FREE Photo Package</li>        <li class="listing_item">2. FREE Dining Credit</li>        <li class="listing_item">3. FREE Shore Excursion Credits</li>        <li class="listing_item">4. FREE Internet Package</li>      </ul>    ` 
-}, 
-offer_3: function () {
- return `    <ul class="listing">      <li class="listing_item">Choose Up To 4 Free Offers:</li>      <li class="listing_item">1. FREE Photo Package</li>      <li class="listing_item">2. FREE Dining Credit</li>      <li class="listing_item">3. FREE Shore Excursion Credits</li>      <li class="listing_item">4. FREE Internet Package</li>    </ul>      ` 
+offer3: function () {
+ return `       <ncl-components-c150 
+	v-bind:class = "'-expandable'" 
+	v-bind:titles = "pricingTitles" 
+	v-bind:datePrices = "pricingDatePrices" 
+	v-bind:offers = "pricingOffers" 
+>
+</ncl-components-c150>
+   ` 
 }, 
 name: function () {
- return  'Antonio'  
+ return  'Antonio' 
 }},template: `                                                                                                               <template v-if= "numMarbles ==  0">
              You have no marbles.            <template v-for=" i in range(numLines)">
               Line {{i + 1}} of {{numLines}}.<br>

@@ -93,24 +93,16 @@
 
     {let $name: 'Antonio' /}
 
-    {let $offer_3 kind="html"}
-        <ul class="listing">
-            <li class="listing_item">Choose Up To 4 Free Offers:</li>
-            <li class="listing_item">1. FREE Photo Package</li>
-            <li class="listing_item">2. FREE Dining Credit</li>
-            <li class="listing_item">3. FREE Shore Excursion Credits</li>
-            <li class="listing_item">4. FREE Internet Package</li>
-        </ul>
-        {let $offer_3 kind="html"}
-            <ul class="listing">
-                <li class="listing_item">Choose Up To 4 Free Offers:</li>
-                <li class="listing_item">1. FREE Photo Package</li>
-                <li class="listing_item">2. FREE Dining Credit</li>
-                <li class="listing_item">3. FREE Shore Excursion Credits</li>
-                <li class="listing_item">4. FREE Internet Package</li>
-            </ul>
-        {/let}
+
+    {let $offer_3}
+        {call ncl.components.c150}
+           {param class: '-expandable' /}
+           {param titles: $pricingTitles /}
+           {param datePrices: $pricingDatePrices /}
+           {param offers: $pricingOffers /}
+       {/call}
     {/let}
+
 
     {switch $numMarbles}
         {case 0}
