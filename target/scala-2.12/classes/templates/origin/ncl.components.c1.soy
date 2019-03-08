@@ -127,42 +127,17 @@
 
     <!--c100-->
     <article class="c100">
-        <div class="c100_card">
+        <div class="c100_card ">
             <div class="c100_body">
                 {call ncl.components.c94}
                     {param desktopImage: $desktopImage /}
-                    {param imagePosition: $imagePosition /}
-                    {param figcaptionImage: $figcaptionImage /}
-                    {param figcaptionType: $figcaptionType /}
-                    {param favoriteStatus: $favoriteStatus /}
-                    {param favoriteLink: $favoriteLink /}
-                    {param favoriteIcon: $favoriteIcon /}
-                    {param linkSocial: $linkSocial /}
-                    {param embarkationPortList: $embarkationPortList /}
-                    {param quantityPorts: $quantityPorts /}
-                    {param summaryList: $summaryList /}
-                    {param duration: $duration /}
-                    {param ships: $ships /}
-                    {param destination: $destination /}
-                    {param embarkationPort: $embarkationPort /}
-                    {param title: $title /}
-                    {param dataImage: $desktopImage.src /}
-                    {param dataTitle: $destination /}
-                    {param dataUrl: $callToActionCard.href /}
+
                 {/call}
             </div>
             <aside class="c100_aside">
                 {call ncl.components.c92}
                     {param merchandisingList: $merchandisingList /}
-                    {param labelTextSail: $labelTextSail /}
-                    {param priceSail: $priceSail /}
-                    {param offer: $offer /}
-                    {param labelTextOffer: $labelTextOffer /}
-                    {param priceOffer: $priceOffer /}
-                    {param callToActionCard: $callToActionCard /}
-                    {param alertClass: $classAlert /}
-                    {param textAlertHeader: $textAlertHeader /}
-                    {param textAlert: $textAlert /}
+
                 {/call}
             </aside>
         </div>
@@ -186,32 +161,21 @@
         {/if}
         <div class="c100_modals">
          {call ncl.components.c150}
-                        {param class: '-expandable' /}
-                        {param titles: $pricingTitles /}
-                        {param datePrices: $pricingDatePrices /}
+
                         {param offers: $pricingOffers /}
                     {/call}
             {call ncl.components.c99}
-                {param class: '-expandable' /}
-                {param duration: $duration /}
-                {param ships: $ships /}
-                {param destination: $destination /}
-                {param embarkationPort: $embarkationPort /}
-                {param labelTextSail: $labelTextSail /}
-                {param priceSail: $priceSail /}
-                {param offer: $offer /}
-                {param labelTextOffer: $labelTextOffer /}
-                {param priceOffer: $priceOffer /}
-                {param offersTitle: $offersTitle /}
-                {param offersList: $offersList /}
-                {param offerDisclaimer: $offerDisclaimer /}
+
                 {param btnLink: $btnLink /}
             {/call}
             {call ncl.components.c150}
-                {param class: '-expandable' /}
-                {param titles: $pricingTitles /}
-                {param datePrices: $pricingDatePrices /}
+
                 {param offers: $pricingOffers /}
+                {param time kind="html"}
+                    {call ncl.components.c1111}
+                        {param class: '-expandable' /}
+                    {/call}
+                {/param}
             {/call}
         </div>
     </article>

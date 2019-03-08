@@ -1,6 +1,7 @@
 object SoyToVueTranslator {
 
   import java.io._
+  import java.util.UUID.randomUUID
   import scala.io._
 
   class SoyToVueTranslator(filename: String) {
@@ -14,7 +15,7 @@ object SoyToVueTranslator {
     val separator = "-"
     val paramStartToken = "{@param"
     val paramStartInCallToken = "{param"
-    val paramCloseToken="{/param}"
+    val paramCloseToken = "{/param}"
     val colonToken = ":"
 
     val ifStartToken = "{if"
@@ -368,18 +369,30 @@ object SoyToVueTranslator {
     }
 
     /**
+      * This function is in charge to apply al necessary modification to the soy
+      * template before attempt to translate it
+      *
+      * @param tmpl
+      * @return
+      */
+    def prepareSoyTemplateForTranslation(tmpl: String): String = {
+      this.extractNestedParamsValueAsLet(tmpl)
+    }
+
+    /**
       * Export the component
       *
       * @param singleFile  whether if the component will be in one file or in folder containing 3 files (js, scss, html)
       * @param destination is the destination path where the component will be saved
       */
-    def exportVueComponent(tmpl:String,singleFile: Boolean = true, destination: String = "") = {
-      val cmpName = (this.getTemplateNamesPace(tmpl) + "-" + this.getTemplateName(tmpl))
+    def exportVueComponent(tmpl: String, singleFile: Boolean = true, destination: String = "") = {
+      val preparedTmpl = this.prepareSoyTemplateForTranslation(tmpl)
+      val cmpName = (this.getTemplateNamesPace(preparedTmpl) + "-" + this.getTemplateName(preparedTmpl))
         .replace(".", "-")
         .replace(" ", "")
-      val cmpTemplate = this.getVueTemplate(tmpl)
-      val cmpProps = this.getParams(tmpl)
-      val stringComputed = this.getComputedProperties(tmpl).mkString(", \n")
+      val cmpTemplate = this.getVueTemplate(preparedTmpl)
+      val cmpProps = this.getParams(preparedTmpl)
+      val stringComputed = this.getComputedProperties(preparedTmpl).mkString(", \n")
       val stringData = "" // TODO: Calculate data
       val stringProps = cmpProps.mkString(" , ")
       val body = this.vueComponentTemplate
@@ -410,8 +423,6 @@ object SoyToVueTranslator {
     }
 
 
-
-
     /**
       * Returns the params defined in the soy template
       *
@@ -422,14 +433,14 @@ object SoyToVueTranslator {
       val typesMap = Map(
         "string" -> "String",
         "html" -> "String",
-        "uri"->"String",
-        "js"->"String",
-        "css"->"String",
-        "attributes"->"String","?"->"String",
-        "short"->"Number","int"->"Number","long"->"Number","float"->"Number","double"->"Number",
+        "uri" -> "String",
+        "js" -> "String",
+        "css" -> "String",
+        "attributes" -> "String", "?" -> "String",
+        "short" -> "Number", "int" -> "Number", "long" -> "Number", "float" -> "Number", "double" -> "Number",
         "bool" -> "Boolean",
-        "any" -> "Object","map" -> "Object","null" -> "Object",
-        "[" -> "Array","list" -> "Array"
+        "any" -> "Object", "map" -> "Object", "null" -> "Object",
+        "[" -> "Array", "list" -> "Array"
       )
 
       if (!tmpl.contains(this.paramStartToken)) {
@@ -444,7 +455,7 @@ object SoyToVueTranslator {
         val newHead = tmpl.slice(0, paramStart - 1)
         val newTail = tmpl.slice(tmpl.indexOf(this.genericCloseToken, paramStart) + this.genericCloseToken.size, tmpl.size)
         val paramSoyType = tmpl.slice(tmpl.indexOf(":", paramStart) + 1, tmpl.indexOf(this.genericCloseToken, paramStart) + this.genericCloseToken.size).trim
-        val propType = typesMap.filter(typeMapItem =>  paramSoyType.startsWith(typeMapItem._1)).head._2
+        val propType = typesMap.filter(typeMapItem => paramSoyType.startsWith(typeMapItem._1)).head._2
         val typeProperty = {
           if (propType != null) s", type: ${propType}" else ""
         }
@@ -454,8 +465,8 @@ object SoyToVueTranslator {
       }
     }
 
-    def getTemplateName(tmpl:String): String = {
-      getTokenValue(tmpl,"template", "}", true)
+    def getTemplateName(tmpl: String): String = {
+      getTokenValue(tmpl, "template", "}", true)
     }
 
     /**
@@ -465,7 +476,7 @@ object SoyToVueTranslator {
       * @param endToken
       * @return
       */
-    def getTokenValue(tmpl:String,startToken: String, endToken: String, sanitizeValue: Boolean = false): String = {
+    def getTokenValue(tmpl: String, startToken: String, endToken: String, sanitizeValue: Boolean = false): String = {
       val tmplStart = tmpl.indexOf(startToken) + startToken.size
       val tmplEnd = tmpl.indexOf(endToken, tmplStart)
       val preResult = tmpl.slice(tmplStart, tmplEnd)
@@ -477,27 +488,81 @@ object SoyToVueTranslator {
       *
       * @return
       */
-    def getTemplateNamesPace(tmpl:String): String = {
-      getTokenValue(tmpl,"namespace", "}")
+    def getTemplateNamesPace(tmpl: String): String = {
+      getTokenValue(tmpl, "namespace", "}")
     }
 
     /**
-      * Fill the dependencies local parameter
+      * Extract any nested param content as a block declaration right before of the parent call
+      *
+      * @param tmpl
+      * @param until
+      * @return
       */
-    def findDependencies(template: String) = {
-      this.getContentBtwTokens(template, "{call", "}")
+    def extractNestedParamsValueAsLet(tmpl: String, until: Int = 0): String = {
+      val tmplLimit = {
+        if (until == 0) tmpl.size else until
+      }
+      val start = tmpl.slice(0, tmplLimit).lastIndexOf(this.paramStartInCallToken)
+      if (tmpl.slice(0, tmplLimit).contains(this.callOpenToken) && start >= 0) {
+        val callParentStart = tmpl.slice(0, start - 1).lastIndexOf(this.callOpenToken)
+        val genericClose = tmpl.indexOf(this.genericCloseToken, start)
+        val genericSlashClose = tmpl.indexOf(this.genericSlashCloseToken, start)
+        val colonStart = tmpl.indexOf(this.colonToken, start)
+        val end = List(genericClose, genericSlashClose).filter(_ >= 0).min
+        val paramCLoseTagStart = tmpl.indexOf(this.paramCloseToken, start)
+        val isArbitrary = end == genericSlashClose
+        val paramName = {
+          if (isArbitrary) {
+            tmpl.slice(start + this.paramStartInCallToken.size + 1, colonStart).trim
+          } else {
+            val firstSpaceAfterParam = tmpl.indexOf(" ", start + this.paramStartInCallToken.size)
+            val secondSpaceAfterName = tmpl.indexOf(" ", firstSpaceAfterParam + 1)
+            tmpl.slice(firstSpaceAfterParam + 1, secondSpaceAfterName).trim
+          }
+        }
+        if (!isArbitrary) {
+          val newValue = "$" + randomUUID().toString.replace("-", "")
+          val newParamDef = s"""${this.paramStartInCallToken} ${paramName}: ${newValue} ${this.genericSlashCloseToken}"""
+          val paramContent = tmpl.slice(end + this.genericCloseToken.size, paramCLoseTagStart - 1)
+
+          val head = tmpl.slice(0, callParentStart - 1)
+          val newTailHead = tmpl.slice(callParentStart, start - 1)
+          val newTailTail = tmpl.slice(paramCLoseTagStart + this.paramCloseToken.size, tmpl.size)
+          val tail: String = newTailHead + newParamDef + newTailTail
+          val newTmpl: String = this.generateLetDeclarationAt(head, head.size - 1, newValue, paramContent) + tail
+          extractNestedParamsValueAsLet(newTmpl, start - 1)
+        } else {
+          extractNestedParamsValueAsLet(tmpl, start - 1)
+        }
+      } else {
+        tmpl
+      }
     }
 
-    def getComponentBindings2(str: String):List[(String,Map[String,String])]={
-
-      List()
+    /**
+      * Generate  a let declaration inserted in the given position
+      *
+      * @param tmpl
+      * @param insertPos
+      * @param variableName
+      * @param content
+      * @return
+      */
+    def generateLetDeclarationAt(tmpl: String, insertPos: Int, variableName: String, content: String): String = {
+      val letDeclaration = s"{let ${variableName} } ${content} {/let}"
+      val head = tmpl.slice(0, insertPos)
+      val tail = tmpl.slice(insertPos + 1, tmpl.size)
+      head + letDeclaration + tail
     }
+
     /**
       * Return a list of Tuple containing each component and it's input props
       *
       * @return
       */
     def getComponentBindings(tmpl: String) = {
+      //val cmps = this.getTemplateComponents(tmpl)
       val components = this.getContentBtwTokens(tmpl, this.callOpenToken, this.genericCloseToken)
       val result = for (cmp <- components) yield {
         val subCmpStart = tmpl.indexOf(cmp)
@@ -566,8 +631,8 @@ object SoyToVueTranslator {
       *
       * @return
       */
-    def getVueTemplate(tmpl:String): String = {
-      val cmpsAndBindings = this.getComponentBindings(tmpl)
+    def getVueTemplate(preparedTmpl: String): String = {
+      val cmpsAndBindings = this.getComponentBindings(preparedTmpl)
       val template =
         this.lintContent(
           this.translateSpecialTags(
@@ -581,7 +646,7 @@ object SoyToVueTranslator {
                           this.removeNamespaceTag(
                             this.removeTemplateTag(
                               this.removesInputParams(
-                                tmpl
+                                preparedTmpl
                               )
                             )
                           )
@@ -655,75 +720,43 @@ object SoyToVueTranslator {
       * @return
       */
     def getComputedProperties(tmpl: String): List[String] = {
-        if(tmpl.contains(this.declarationToken)){
-          val startPos = tmpl.lastIndexOf(this.declarationToken)
-          val genericSlashClose = tmpl.indexOf(this.genericSlashCloseToken, startPos)
-          val genericClose = tmpl.indexOf(this.genericCloseToken, startPos)
-          val colonStart =  tmpl.indexOf(this.colonToken, startPos)
-          val declarationEndTag = tmpl.indexOf(this.declarationEndToken, startPos)
-          val endDeclarationStart = List(genericSlashClose,genericClose).filter(_>=0).min
-          val isArbitrary = endDeclarationStart==genericSlashClose
-          val end = {
-            if(isArbitrary) genericSlashClose+this.genericSlashCloseToken.size else declarationEndTag+this.declarationEndToken.size
-          }
-          val fnName = {
-            if(isArbitrary)
-              tmpl.slice(startPos+this.declarationToken.size,colonStart)
-            else{
-              val nameStart = tmpl.indexOf(" ",startPos+this.declarationToken.size)
-              val spaceAfterName = tmpl.indexOf(" ",nameStart+1)
-              tmpl.slice(nameStart,List(spaceAfterName,genericClose).filter(_>=0).min)
-            }
-          }
-          val stringFn = {
-            if(isArbitrary)
-              this.getFnDefinition(this.sanitize(fnName), tmpl.slice(colonStart+1,genericSlashClose-1))
-            else{
-              val newTemplate = this.getVueTemplate(tmpl.slice(genericClose+1,declarationEndTag-1))
-              this.getFnDefinition(this.sanitize(fnName), s"`${newTemplate}`")
-            }
-          }
-          val tmplWithoutLetBlock = tmpl.slice(0,startPos-1)+tmpl.slice(end,tmpl.size)
-          List.concat(List(stringFn), getComputedProperties(tmplWithoutLetBlock))
-        }else{
-          List()
+      if (tmpl.contains(this.declarationToken)) {
+        val startPos = tmpl.lastIndexOf(this.declarationToken)
+        val genericSlashClose = tmpl.indexOf(this.genericSlashCloseToken, startPos)
+        val genericClose = tmpl.indexOf(this.genericCloseToken, startPos)
+        val colonStart = tmpl.indexOf(this.colonToken, startPos)
+        val declarationEndTag = tmpl.indexOf(this.declarationEndToken, startPos)
+        val endDeclarationStart = List(genericSlashClose, genericClose).filter(_ >= 0).min
+        val isArbitrary = endDeclarationStart == genericSlashClose
+        val end = {
+          if (isArbitrary) genericSlashClose + this.genericSlashCloseToken.size else declarationEndTag + this.declarationEndToken.size
         }
-//      if (tmpl.contains(this.declarationToken)) {
-//        val startPos = tmpl.lastIndexOf(this.declarationToken)
-//        val arbitraryEndPos = tmpl.indexOf(this.genericSlashCloseToken, startPos)
-//        val renderingEndPos = tmpl.indexOf(this.declarationEndToken, startPos)
-//        val endPos = List(arbitraryEndPos, renderingEndPos).filter(_ >= 0).min
-//        val letBlockEnd = {
-//          if (endPos == arbitraryEndPos) endPos + this.genericSlashCloseToken.size else endPos + this.declarationEndToken.size
-//        }
-//        val letBlock = tmpl.slice(startPos, endPos)
-//        val tmplWithoutLetBlock = tmpl.slice(0, startPos) + tmpl.slice(letBlockEnd, tmpl.size)
-//        if (endPos == arbitraryEndPos) //arbitrary let declaration
-//        {
-//          val fnName = letBlock.slice(letBlock.indexOf("$") + 1, letBlock.indexOf(":"))
-//          val fnBody = letBlock.slice(letBlock.indexOf(":") + 1, letBlock.size)
-//          val stringFn = getFnDefinition(fnName, fnBody)
-//          List.concat(List(stringFn), getComputedProperties(tmplWithoutLetBlock))
-//        }
-//        else {
-//          val letBlockDeclaration = letBlock.slice(this.declarationEndToken.size - 1, letBlock.indexOf(this.genericCloseToken) + this.genericCloseToken.size)
-//          val firstSpace = letBlockDeclaration.indexOf(" ")
-//          val firstGenericClose = letBlockDeclaration.indexOf(this.genericCloseToken)
-//          val firstOccurrence = Math.min(firstSpace, firstGenericClose)
-//          val nameEnd = {
-//            if (firstOccurrence > 0) firstOccurrence else Math.max(firstSpace, firstGenericClose)
-//          }
-//          val fnName = letBlockDeclaration.slice(letBlockDeclaration.indexOf("$") + 1, nameEnd)
-//          val fnBody = letBlock.slice(
-//            letBlock.indexOf(this.genericCloseToken) + this.genericCloseToken.size,
-//            letBlock.size
-//          ).replaceAll("  ", " ")
-//          val stringFn = getFnDefinition(fnName, s"`${fnBody}`")
-//          List.concat(List(stringFn), getComputedProperties(tmplWithoutLetBlock))
-//        }
-//      } else {
-//        List()
-//      }
+        val fnName = {
+          if (isArbitrary)
+            tmpl.slice(startPos + this.declarationToken.size, colonStart)
+          else {
+            val nameStart = tmpl.indexOf(" ", startPos + this.declarationToken.size)
+            val spaceAfterName = tmpl.indexOf(" ", nameStart + 1)
+            tmpl.slice(nameStart, List(spaceAfterName, genericClose).filter(_ >= 0).min)
+          }
+        }
+        val stringFn = {
+          if (isArbitrary)
+            this.getFnDefinition(this.sanitize(fnName), tmpl.slice(colonStart + 1, genericSlashClose - 1))
+          else {
+            val newTemplate = this.getVueTemplate(
+              this.prepareSoyTemplateForTranslation(
+                tmpl.slice(genericClose + 1, declarationEndTag - 1)
+              )
+            )
+            this.getFnDefinition(this.sanitize(fnName), s"`${newTemplate}`")
+          }
+        }
+        val tmplWithoutLetBlock = tmpl.slice(0, startPos - 1) + tmpl.slice(end, tmpl.size)
+        List.concat(List(stringFn), getComputedProperties(tmplWithoutLetBlock))
+      } else {
+        List()
+      }
     }
 
     /**
@@ -831,13 +864,13 @@ object SoyToVueTranslator {
 
   def main(args: Array[String]): Unit = {
     try {
-      val inputs =Array("src/main/resources/templates/origin","c1.soy")
-      if(inputs.length==0){
+      val inputs = Array("src/main/resources/templates/origin", "c1.soy")
+      if (inputs.length == 0) {
         throw new Exception(" You need to provide at least the source path of your soy files!!")
       }
       val currentDir = System.getProperty("user.dir")
       val sourcePath = inputs.head
-      val cmpFilename = if(inputs.last==inputs.head) "" else inputs.last
+      val cmpFilename = if (inputs.last == inputs.head) "" else inputs.last
       val sourcePathFolder = new File(String.valueOf(s"${currentDir}/${sourcePath}"))
       val generatedPath = "generated"
       val generatedFolder = new File(String.valueOf(generatedPath))
@@ -852,15 +885,15 @@ object SoyToVueTranslator {
       //check folder structure
       mkDirs(filteredSourcePathList, generatedFolder)
       val translationPath = s"${generatedFolder.getAbsolutePath}/${filteredSourcePathList.mkString("/")}"
-      val cmpFilter = if(cmpFilename.length>0) cmpFilename else ".soy"
+      val cmpFilter = if (cmpFilename.length > 0) cmpFilename else ".soy"
       val soyFiles = sourcePathFolder.listFiles().filter(_.getName.endsWith(cmpFilter)).map(_.getAbsolutePath)
 
 
       for (soy <- soyFiles) {
         try {
           val transInstance = new SoyToVueTranslator(soy)
-          val soyContent:String = transInstance.rawText
-          transInstance.exportVueComponent(soyContent,true, translationPath)
+          val soyContent: String = transInstance.rawText
+          transInstance.exportVueComponent(soyContent, true, translationPath)
           println(s"${soy}: Success!!")
         } catch {
           case e: Throwable => println(s"Error translating file ${soy}, Cause: ${e.getMessage}")
