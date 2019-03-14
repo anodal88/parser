@@ -222,6 +222,135 @@ object SoyToVueTranslator {
       s"""${this.vTemplateStart} v-for="${evalExpr}">${content}${this.vTemplateEnd}"""
     }
 
+    /** *******************************************************************************************************************/
+    /**
+      * Return a Map representing the given conditional statement
+      *
+      * @param conditionalStatement
+      * @return
+      */
+    def getConditionalMap(conditionalStatement: String): Map[String, String] = {
+      val reg = "\\{|\\}|if|elseif|else|/if".r
+      val parts = conditionalStatement.split(reg.regex)
+        .map(_.replace("}", ""))
+        .filter(word => !word.isEmpty)
+
+      val isElsePresent = conditionalStatement.contains(this.elseToken)
+      val ifParts: Array[String] = {
+        if (isElsePresent) parts.reverse.tail.reverse else parts
+      }
+      val conditionsList = for (i <- 0 until ifParts.length - 1; if i % 2 == 0) yield {
+        ifParts(i).replace("$", "")
+      }
+      val valuesList = for (i <- 0 to ifParts.length - 1; if i % 2 != 0) yield {
+        ifParts(i)
+      }
+      val conditionalsMap = (conditionsList zip valuesList).toMap
+      val elseMap = {
+        if (isElsePresent)
+          Map(conditionsList.map(c => s"!(${c})").mkString(s" ${this.vAnd} ") -> parts.last)
+        else
+          Map()
+      }
+      conditionalsMap ++ elseMap
+    }
+
+    /**
+      * Return an string representing a valid vue object for the given conditional
+      *
+      * @param conditionalStatement
+      * @return
+      */
+    def getClassStyleVueBindSyntax(conditionalStatement: String): String = {
+      val vueClassStyleObject = this.getConditionalMap(conditionalStatement).map(x => s"'${x._2}':${x._1}").mkString(",")
+      s"{${vueClassStyleObject}}"
+    }
+
+    /**
+      * Return the valid ternary operator for the html attributes diff of class and style
+      *
+      * @param conditionalMaps
+      * @return
+      */
+    def getHtmlAttributeVueBindSyntax(conditionalMaps: Map[String, String]): String = {
+      if (conditionalMaps.isEmpty) {
+        "''"
+      } else {
+        s" (${conditionalMaps.head._1} ? '${conditionalMaps.head._2}' : " + getHtmlAttributeVueBindSyntax(conditionalMaps.tail) + " )"
+      }
+    }
+
+    def translateConditionalAttributes(tmpl: String): String = {
+      if (tmpl.contains(this.ifStartToken)) {
+        val start = tmpl.lastIndexOf(this.ifStartToken)
+        val end = tmpl.indexOf(this.endIfToken, start)
+        val subTmpl = tmpl.slice(0, start - 1)
+        val angularBracketStart = subTmpl.lastIndexOf("<")
+        val angularBracketClose = tmpl.indexOf(">", end)
+        val angularBracketSlashClose = tmpl.indexOf("/>", end)
+        val angularClose = List(angularBracketClose, angularBracketSlashClose).filter(_ >= 0).min
+        val isOnAttribute = end < angularClose
+        if (isOnAttribute) {
+          val equalStart = subTmpl.indexOf("=")
+          val attributeName = subTmpl.slice(subTmpl.lastIndexOf(" ") + 1, equalStart).trim
+          val attrStart = subTmpl.indexOf(attributeName)
+          val assignmentPos = subTmpl.indexOf("=", attrStart)
+          val sQuoteStart = tmpl.indexOf("'", assignmentPos)
+          val dQuote = tmpl.indexOf("\"", assignmentPos)
+          val attrValueStart = List(sQuoteStart, dQuote).filter(_ >= 0).min
+          val isUsingDoubleQuotes = attrValueStart == dQuote
+          val attrValueEnd = {
+            if (isUsingDoubleQuotes)
+              tmpl.indexOf("\"", attrValueStart + 1)
+            else
+              tmpl.indexOf("'", attrValueStart + 1)
+          }
+          val attrValue = tmpl.slice(attrValueStart + 1, attrValueEnd)
+          val ifStatement = tmpl.slice(start, end + this.endIfToken.size)
+          val newAttrPos = subTmpl.indexOf(attributeName) - 1
+          val isClassOrStyleAttr = attributeName == "class" || attributeName == "style"
+          val attrBindingValue = {
+            if (isClassOrStyleAttr) {
+              this.getClassStyleVueBindSyntax(ifStatement)
+            } else {
+              val attrValueNewHead = attrValue.slice(0, attrValue.indexOf(this.ifStartToken) - 1).trim
+              val attrValueNewTail = attrValue.slice(attrValue.indexOf(this.endIfToken) + this.endIfToken.size, attrValue.size).trim
+              val attrConditionalTrans = this.getHtmlAttributeVueBindSyntax(this.getConditionalMap(ifStatement))
+              val exprHead = {
+                if (attrValueNewHead.size > 0) s"'${attrValueNewHead}' + " else ""
+              }
+              val exprTail = {
+                if (attrValueNewTail.size > 0) s" + '${attrValueNewTail}' " else ""
+              }
+              s"${exprHead} ${attrConditionalTrans} ${exprTail}"
+            }
+          }
+          val attrBindingExpr = s""" v-bind:${attributeName} = "${attrBindingValue}" """
+          val newHead = {
+            if (isClassOrStyleAttr)
+              tmpl.slice(0, newAttrPos) + attrBindingExpr
+            else
+              tmpl.slice(0, attrStart - 1) + attrBindingExpr
+          }
+          val newTail = {
+            if (isClassOrStyleAttr)
+              tmpl.slice(newAttrPos + 1, start - 1) + tmpl.slice(end + this.endIfToken.size, tmpl.size)
+            else
+              tmpl.slice(attrValueEnd+1, tmpl.size)
+          }
+          translateConditionalAttributes(newHead + newTail)
+        } else {
+          //Ignore it b/c will be translated after
+          val newHead = tmpl.slice(0, start - 1)
+          val newTail = tmpl.slice(end + this.endIfToken.size, tmpl.size)
+          translateConditionalAttributes(newHead + newTail)
+        }
+      } else {
+        tmpl
+      }
+    }
+
+    /** ***************************************************************************/
     /**
       * Helper function to translate `for` and `foreach`
       *
@@ -613,6 +742,15 @@ object SoyToVueTranslator {
       }
     }
 
+    private def translateIfInsideAttributes(tmpl: String): String = {
+      if (tmpl.contains(this.ifStartToken)) {
+
+        ""
+      } else {
+        tmpl
+      }
+    }
+
     /**
       * Removes weird characters from the given string
       *
@@ -639,18 +777,20 @@ object SoyToVueTranslator {
             this.translateSwitchStatements(
               this.translateDeclarations(
                 this.translateIfStatements(
-                  this.translateLiterals(
-                    this.translateForStatements(
-                      this.translatePrints(
-                        this.replaceCallsRenderingVueComponents(
-                          this.removeNamespaceTag(
-                            this.removeTemplateTag(
-                              this.removesInputParams(
-                                preparedTmpl
+                  this.translateConditionalAttributes(
+                    this.translateLiterals(
+                      this.translateForStatements(
+                        this.translatePrints(
+                          this.replaceCallsRenderingVueComponents(
+                            this.removeNamespaceTag(
+                              this.removeTemplateTag(
+                                this.removesInputParams(
+                                  preparedTmpl
+                                )
                               )
                             )
-                          )
-                          , cmpsAndBindings)
+                            , cmpsAndBindings)
+                        )
                       )
                     )
                   )
@@ -828,6 +968,7 @@ object SoyToVueTranslator {
         translateSwitchStatements(newHead + switchWrapper + newTail)
       }
     }
+
 
     /**
       * Translate some special closure tags to the literals in vue js
