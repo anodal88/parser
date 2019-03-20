@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 object SoyToVueTranslator {
 
   import java.io._
@@ -276,27 +278,35 @@ object SoyToVueTranslator {
       if (conditionalMaps.isEmpty) {
         "''"
       } else {
-        s" (${conditionalMaps.head._1} ? '${conditionalMaps.head._2}' : " + getHtmlAttributeVueBindSyntax(conditionalMaps.tail) + " )"
+        val elseCondition = {
+          if(conditionalMaps.tail.size==1)
+            s"'${conditionalMaps.tail.head._2.trim}'"
+          else
+            getHtmlAttributeVueBindSyntax(conditionalMaps.tail)
+        }
+        s" (${conditionalMaps.head._1.trim} ? '${conditionalMaps.head._2.trim}' : " + elseCondition + " )"
       }
     }
 
-    def translateConditionalAttributes(tmpl: String): String = {
-      if (tmpl.contains(this.ifStartToken)) {
+    @tailrec
+    private def translateConditionalAttributes(tmpl: String): String = {
+      if (!tmpl.contains(this.ifStartToken)) {
+        tmpl
+      } else {
         val start = tmpl.lastIndexOf(this.ifStartToken)
         val end = tmpl.indexOf(this.endIfToken, start)
         val subTmpl = tmpl.slice(0, start - 1)
-        val angularBracketStart = subTmpl.lastIndexOf("<")
-        val angularBracketClose = tmpl.indexOf(">", end)
-        val angularBracketSlashClose = tmpl.indexOf("/>", end)
-        val angularClose = List(angularBracketClose, angularBracketSlashClose).filter(_ >= 0).min
-        val isOnAttribute = end < angularClose
+        val nextHtmlBracketOpen = tmpl.indexOf("<", end)
+        val htmlBracketClose = tmpl.indexOf(">", end)
+        val htmlBracketSlashClose = tmpl.indexOf("/>", end)
+        val angularClose = List(htmlBracketClose, htmlBracketSlashClose).filter(_ >= 0).min
+        val isOnAttribute = end < angularClose && angularClose < nextHtmlBracketOpen
         if (isOnAttribute) {
-          val equalStart = subTmpl.indexOf("=")
+          val equalStart = subTmpl.lastIndexOf("=")
           val attributeName = subTmpl.slice(subTmpl.lastIndexOf(" ") + 1, equalStart).trim
-          val attrStart = subTmpl.indexOf(attributeName)
-          val assignmentPos = subTmpl.indexOf("=", attrStart)
-          val sQuoteStart = tmpl.indexOf("'", assignmentPos)
-          val dQuote = tmpl.indexOf("\"", assignmentPos)
+          val attrStart = subTmpl.lastIndexOf(attributeName)
+          val sQuoteStart = tmpl.indexOf("'", equalStart)
+          val dQuote = tmpl.indexOf("\"", equalStart)
           val attrValueStart = List(sQuoteStart, dQuote).filter(_ >= 0).min
           val isUsingDoubleQuotes = attrValueStart == dQuote
           val attrValueEnd = {
@@ -307,7 +317,7 @@ object SoyToVueTranslator {
           }
           val attrValue = tmpl.slice(attrValueStart + 1, attrValueEnd)
           val ifStatement = tmpl.slice(start, end + this.endIfToken.size)
-          val newAttrPos = subTmpl.indexOf(attributeName) - 1
+          val newAttrPos = subTmpl.lastIndexOf(attributeName) - 1
           val isClassOrStyleAttr = attributeName == "class" || attributeName == "style"
           val attrBindingValue = {
             if (isClassOrStyleAttr) {
@@ -345,8 +355,6 @@ object SoyToVueTranslator {
           val newTail = tmpl.slice(end + this.endIfToken.size, tmpl.size)
           translateConditionalAttributes(newHead + newTail)
         }
-      } else {
-        tmpl
       }
     }
 
@@ -359,6 +367,7 @@ object SoyToVueTranslator {
       * @param endTag
       * @return
       */
+    @tailrec
     private def loopTransHelper(source: String, startTag: String, endTag: String): String = {
 
       def getIfEmptyWrapper(loopBlock: String, loopEvalExpr: String): String = {
@@ -419,7 +428,7 @@ object SoyToVueTranslator {
       * @return
       */
     def translatePrints(tmpl: String): String = {
-
+      @tailrec
       def replaceOpenCloseTags(tmpl: String, start: String, end: String, startReplace: String, endReplace: String): String = {
         if (!tmpl.contains(start)) {
           tmpl
@@ -445,6 +454,7 @@ object SoyToVueTranslator {
       * @param tagEnd
       * @return
       */
+    @tailrec
     private def removesSoyTagsElements(tmpl: String, tagStart: String, tagEnd: String): String = {
       if (!tmpl.contains(tagStart)) {
         tmpl
@@ -469,6 +479,7 @@ object SoyToVueTranslator {
     /**
       * Replaces all call to other soy templates with the similar call on vue js
       */
+
     def replaceCallsRenderingVueComponents(tmpl: String, cmpDependencyMap: List[(String, Map[String, String])]): String = {
       if (cmpDependencyMap.isEmpty) {
         tmpl
@@ -477,7 +488,7 @@ object SoyToVueTranslator {
         val renderedCmpBody = this.renderVueComponent(cmpSelector, cmpDependencyMap.head._2)
         val cmpCallIndex = tmpl.indexOf(this.callOpenToken)
         val cmpCallCloseIndex = tmpl.indexOf(this.callCloseToken, cmpCallIndex)
-        tmpl.slice(0, cmpCallIndex - 1) + renderedCmpBody + tmpl.slice(cmpCallCloseIndex + this.callCloseToken.size, tmpl.size)
+        tmpl.slice(0, cmpCallIndex) + renderedCmpBody + tmpl.slice(cmpCallCloseIndex + this.callCloseToken.size, tmpl.size)
       } else {
         replaceCallsRenderingVueComponents(
           replaceCallsRenderingVueComponents(tmpl, List(cmpDependencyMap.head)), cmpDependencyMap.tail
@@ -849,7 +860,7 @@ object SoyToVueTranslator {
         val letBlockEnd = {
           if (endPos == arbitraryEndPos) endPos + this.genericSlashCloseToken.size else endPos + this.declarationEndToken.size
         }
-        translateDeclarations(tmpl.slice(0, startPos) + tmpl.slice(letBlockEnd + 1, tmpl.size))
+        translateDeclarations(tmpl.slice(0, startPos) + tmpl.slice(letBlockEnd, tmpl.size))
       }
     }
 
